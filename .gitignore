@@ -1,0 +1,38 @@
+# 내부 문서·시안·옛 페이지 (공개 저장소에 올리지 않는다)
+docs/
+drafts/
+index-v1.html
+img/manifest.json
+
+# 어떤 페이지(index.html, posmos-apply.html, posmos-privacy.html)에서도 쓰지 않는 원본 이미지
+img/qr-2.png
+img/qr-3.jpg
+img/qr-4.png
+img/kiosk-1.png
+img/kiosk-2.png
+img/kiosk-3.png
+img/kiosk-1-600.jpg
+img/hero-1.jpg
+img/hero-2.jpg
+img/front-hero.png
+img/front-1.jpg
+img/front-2.jpg
+img/delivery-1.jpg
+img/delivery-2.jpg
+img/delivery-3.jpg
+img/table-1.jpg
+img/table-2.jpg
+img/table-4.jpg
+img/table-5.jpg
+img/table-6.jpg
+img/table-7.jpg
+img/table-8.jpg
+img/dev-checklist.jpg
+
+# OS·에디터 부산물
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 운영 도메인 연결 파일: websiteredesign 저장소에는 올리지 않는다 (posmos.net 과 충돌 방지)
+CNAME
