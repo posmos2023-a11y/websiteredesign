@@ -112,7 +112,7 @@ p,li,dd{text-wrap:pretty}
 .fld{margin-bottom:16px}
 .fld label{display:block;margin-bottom:8px;font-size:15px;font-weight:700;letter-spacing:-.01em}
 .hint{margin:-4px 0 8px;font-size:15px;color:var(--ink-3)}
-.fld input{display:block;width:100%;height:58px;padding:0 18px;border:2px solid var(--line);border-radius:16px;background:#fff;font-size:18px;font-weight:600;outline:0;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.fld input{display:block;width:100%;height:58px;padding:0 18px;border:2px solid #8A91A0;border-radius:16px;background:#fff;font-size:18px;font-weight:600;outline:0;transition:border-color .2s;-webkit-appearance:none;appearance:none}
 .fld input::placeholder{color:#7A8190;font-weight:500;opacity:1}
 .fld input:focus{border-color:var(--blue)}
 /* 상태마다 테두리는 하나만: 포커스 = 파랑, 오류 = 빨강 */
@@ -126,13 +126,15 @@ p,li,dd{text-wrap:pretty}
 .err a{font-weight:800;text-decoration:underline}
 .agree a,.err a{display:inline-block;padding:13px 0;margin:-13px 0}
 .agree{display:flex;gap:12px;align-items:flex-start;min-height:48px;padding:6px 0;font-size:15px;font-weight:500;line-height:1.55;color:var(--ink-2);cursor:pointer}
-.agree input{flex:none;width:26px;height:26px;margin:0;border:2px solid #C5CAD6;border-radius:8px;background:#fff;-webkit-appearance:none;appearance:none;cursor:pointer;transition:background-color .15s,border-color .15s}
+.agree input{flex:none;width:26px;height:26px;margin:0;border:2px solid var(--ink-3);border-radius:8px;background:#fff;-webkit-appearance:none;appearance:none;cursor:pointer;transition:background-color .15s,border-color .15s}
 .agree input:checked{border-color:var(--blue);background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.5l3.2 3.2L14 5.8'/%3E%3C/svg%3E") center/18px no-repeat}
 .agree a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .agree span{text-wrap:balance}
 .fc form .btn{width:100%;margin-top:12px;min-height:64px;padding:8px 28px;font-size:19px;border-radius:20px}
 .prom{display:grid;gap:3px;margin-top:18px;font-size:15px;font-weight:500;line-height:1.55;color:var(--ink-2)}
 .prom li:first-child{color:var(--ink);font-weight:700}
+/* 휴대폰: 안심 문구는 줄이 넘어가도 한 문장이 한 약속으로 읽히도록 문장 사이를 벌린다 */
+@media (max-width:699px){ .prom{gap:8px} }
 .or{margin:22px 0 10px;font-size:15px;font-weight:700;color:var(--ink-3)}
 .btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn2 a{min-height:52px;padding:4px 8px;font-size:16px}
@@ -293,9 +295,9 @@ if(META_PIXEL_ID){
 <main id="main" class="ap">
   <div class="wrap">
     <div class="ap-head">
-      <p class="eyebrow">무료 상담 신청</p>
-      <h1 class="h1" id="h1"><span>우리 매장도 <em class="z">0원</em> 되는지</span> <span>확인해 드립니다</span></h1>
-      <p class="lead">전화번호와 지역만 남겨 주세요. 담당자가 영업일 9시~18시 기준, 1시간 안에 직접 전화드립니다.</p>
+      <p class="eyebrow">무료 상담 신청 · 토스플레이스 공식 파트너</p>
+      <h1 class="h1" id="h1"><span>사장님도 <em class="z">0원</em> 되는지</span> <span>확인해 드립니다</span></h1>
+      <p class="lead">전화번호와 지역만 남겨 주세요. 담당자가 <span class="nb">영업일 9시~18시</span> 기준, 1시간 안에 직접 전화드립니다.</p>
     </div>
 
     <div class="ap-g">
@@ -321,9 +323,9 @@ if(META_PIXEL_ID){
           <button class="btn" id="submitBtn" type="submit">0원 되는지 확인받기</button>
         </form>
         <ul class="prom">
-          <li>영업일 9시~18시 기준, 1시간 안에 담당자가 전화드립니다.</li>
+          <li><span class="nb">영업일 9시~18시엔</span> 1시간 안에, 저녁·주말엔 <span class="nb">다음 영업일에</span> 전화드립니다.</li>
           <li>상담만 받고 안 하셔도 됩니다.</li>
-          <li>남기신 번호는 상담 연락과 서비스 안내에만 씁니다.</li>
+          <li>남기신 번호는 상담 연락과 <span class="nb">서비스 안내에만</span> 씁니다.</li>
         </ul>
         <p class="or">전화나 카카오톡이 편하시면</p>
         <div class="btn2">
@@ -338,7 +340,7 @@ if(META_PIXEL_ID){
       <h2>포스모스에 맡기면</h2>
       <dl>
         <div><dt>쓰던 기기로 시작하면 0원</dt><dd>쓰던 태블릿·휴대폰에 토스프론트를 연결하면 <span class="nb">설치비·관리비·기기값</span> 0원입니다. 매달 내는 돈도 없습니다.</dd></div>
-        <div><dt>포스기 세트는 월 34,000원</dt><dd>인터넷·CCTV·포스기 본체 포함. LGU+ 모바일 결합 시, 부가세 별도.</dd></div>
+        <div><dt>포스기 세트는 월 34,000원</dt><dd>인터넷·CCTV·포스기 본체 포함. <span class="nb">LGU+ 모바일 결합 시,</span> <span class="nb">부가세 별도.</span></dd></div>
         <div><dt>서류는 포스모스가</dt><dd>카드사 가맹 신청과 필요 서류를 대행합니다.</dd></div>
         <div><dt>배달 3사 통합 프로그램</dt><dd>배달의민족·쿠팡이츠·요기요를 포스 한 화면에서 봅니다.</dd></div>
       </dl>
@@ -400,7 +402,7 @@ try{
   /* from 값에 따라 화면 문구(H1, 제출 버튼)만 바꾼다. 전송되는 '신청 버튼' 값은 위 clickedButton 그대로다 */
   var raw=fromRaw||'',label='0원 되는지 확인받기';
   if(raw.indexOf('세트')>-1){
-    $('#h1').innerHTML='<span>포스기 세트,</span> <span>우리 매장 요금을 안내해 드립니다</span>';
+    $('#h1').innerHTML='<span>포스기 세트,</span> <span>사장님 매장 요금을 안내해 드립니다</span>';
     label='포스기 세트 상담받기';
   }else if(raw.indexOf('수발주')>-1||raw.indexOf('개발문의')>-1){
     $('#h1').innerHTML='<span>개발 문의를 남겨 주세요</span>';
@@ -438,7 +440,7 @@ try{
     /* 옆 칸이 카드 높이에 기대는 넓은 화면에서만 높이를 유지한다 */
     if(W.matchMedia('(min-width:900px)').matches)card.style.minHeight=card.offsetHeight+'px';
     card.innerHTML='<div class="done" role="status"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>'+
-      '<h2 tabindex="-1">접수됐습니다.</h2><p>담당자가 영업일 9시~18시 기준 1시간 안에 <b>'+mask+'</b> 번호로 전화드립니다.</p><p>모르는 번호여도 받아 주세요.</p>'+
+      '<h2 tabindex="-1">접수됐습니다.</h2><p>담당자가 <span class="nb">영업일 9시~18시</span> 기준 1시간 안에 <b>'+mask+'</b> 번호로 전화드립니다.</p><p>모르는 번호여도 받아 주세요.</p>'+
       '<div class="dbtn"><a class="btn-o" href="tel:15442485'+L+'급하시면 지금 전화 1544-2485</a><a class="btn-k" href="'+KAKAO+L+'카카오톡 채널로 묻기</a></div></div>';
     if(card.getBoundingClientRect().top<72)card.scrollIntoView();
     $('h2',card).focus({preventScroll:true});
