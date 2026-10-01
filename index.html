@@ -162,8 +162,12 @@ p,li,dd,.fine,.d,.note,.prom li{text-wrap:pretty}
 .menu{display:none}
 .hd .btn,.hd .btn-o,.hd .btn-k{min-height:48px;padding:0 14px;font-size:15px;border-radius:12px;white-space:nowrap}
 /* 헤더 카카오톡: 노트북 폭에서만(더 넓으면 플로팅 버튼이 맡는다). 전화(tel:)는 노트북에서 쓸 수 없다 */
-.hd .hd-k{display:none}
-@media (min-width:1000px) and (max-width:1759px){ .hd .hd-k{display:inline-flex} }
+/* 첫 화면 연락 수단은 헤더로 모은다: 전화 · 카톡(휴대폰은 아이콘) · 무료 상담(휴대폰은 숨김: 바로 아래 주 버튼과 하단 바가 같은 일) */
+.hd .hd-k svg{fill:currentColor}
+.hd .hd-k .kt{display:none}
+@media (min-width:700px){ .hd .hd-k .kt{display:inline} .hd .hd-k svg{display:none} }
+@media (max-width:699px){ .hd .hd-k{width:48px;padding:0} .hd .btn{display:none} }
+@media (min-width:1760px){ .hd .hd-k{display:none} }
 .tel-long{display:none}
 @media (min-width:700px){
   .hd .wrap{height:72px}
@@ -172,7 +176,7 @@ p,li,dd,.fine,.d,.note,.prom li{text-wrap:pretty}
   .tel-long{display:inline}.tel-short{display:none}
 }
 @media (min-width:1100px){
-  .menu{display:flex;gap:2px;margin-right:14px}
+  .menu{display:none}   /* 광고 랜딩: 메뉴는 제목→버튼 흐름을 끊는 출구라 숨긴다(이동 링크는 푸터에 있다) */
   .menu a{display:flex;align-items:center;min-height:48px;padding:0 13px;font-size:15.5px;font-weight:700;letter-spacing:-.02em;color:var(--ink-2);border-radius:12px;white-space:nowrap;transition:color .2s,background-color .2s}
 }
 
@@ -356,11 +360,11 @@ p,li,dd,.fine,.d,.note,.prom li{text-wrap:pretty}
 @supports (grid-template-rows:subgrid){
   @media (min-width:700px){
     .choose .cards{row-gap:0}
-    .choose .card{display:grid;grid-template-rows:subgrid;grid-row:span 7}
+    .choose .card{display:grid;grid-template-rows:subgrid;grid-row:span 5}
     .choose .card>*{min-width:0}
     .choose .card .tag{justify-self:start}
     .choose .card .price,.choose .card .price+.fine{min-height:0}
-    /* 두 카드의 주 버튼이 같은 줄(6)에 놓인다: ②는 그 아래(7)에 '구성 자세히 보기' */
+    /* 두 카드의 주 버튼이 같은 줄(5)에 놓인다 */
     .choose .card .gfx{align-self:start}
     .choose .card .btn{align-self:end}
     .choose .card-b .lnk{justify-self:center}
@@ -374,6 +378,11 @@ p,li,dd,.fine,.d,.note,.prom li{text-wrap:pretty}
   .card{padding:48px 44px 44px;border-radius:44px}
 }
 
+.choose-note{margin-top:28px;text-align:center;font-size:15px;font-weight:600;letter-spacing:-.01em;color:#E8ECFF}
+@media (min-width:700px){ .choose-note{margin-top:40px} }
+/* 히어로: 알약 한 줄 바로 아래에 무료 조건, 그 아래 주 버튼 */
+.hero .points+.note{margin-top:10px}
+
 /* ---------- 폼 카드 (폼①·폼② 공통) ---------- */
 .formstage{position:relative;margin:0 calc(var(--g) * -1);padding:24px var(--g) 32px}
 .formstage .slab{position:absolute;inset:0;background:var(--orange)}
@@ -386,6 +395,7 @@ p,li,dd,.fine,.d,.note,.prom li{text-wrap:pretty}
 .fc-t{font-size:clamp(23px,2.7vw,31px);font-weight:900;letter-spacing:-.035em;line-height:1.28;margin-bottom:20px}
 .fc-t>span{display:block}
 .chips{position:relative;display:flex;flex-wrap:wrap;gap:8px;min-width:0;margin-bottom:18px;border:0}
+.fc .chips{display:none}   /* 화면에서는 숨긴다: 누른 버튼이 이미 관심 쪽을 정하고(폼 제목·버튼 글이 따라 바뀜), 전송값은 그대로 남는다 */
 .chips legend{margin-bottom:10px;font-size:15px;font-weight:700;color:var(--ink-2)}
 .chips input{position:absolute;width:1px;height:1px;opacity:0}
 .chips label{display:flex;align-items:center;gap:6px;min-height:48px;padding:0 16px;border-radius:999px;background:var(--soft);font-size:15.5px;font-weight:700;letter-spacing:-.01em;cursor:pointer;transition:background-color .2s,color .2s}
@@ -428,7 +438,8 @@ p,li,dd,.fine,.d,.note,.prom li{text-wrap:pretty}
 .prom li:first-child{color:var(--ink);font-weight:700}
 /* 휴대폰: 안심 문구는 줄이 넘어가도 한 문장이 한 약속으로 읽히도록 문장 사이를 벌린다 */
 @media (max-width:699px){ .prom{gap:8px} }
-.fc .or{margin:22px 0 10px;font-size:15px;font-weight:700;color:var(--ink-3)}   /* .fc 로 한정: 배달 구역의 '국내 최초 무료' 꼬리표(.tag.or)에는 걸리지 않는다 */
+.fc .or{margin:22px 0 10px;font-size:15px;font-weight:700;color:var(--ink-3)}
+.fc .btn2{margin-top:18px}   /* .fc 로 한정: 배달 구역의 '국내 최초 무료' 꼬리표(.tag.or)에는 걸리지 않는다 */
 .btn2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn2 a{min-height:52px;padding:4px 8px;font-size:16px}
 .co{margin-top:16px;font-size:15px;line-height:1.6;color:var(--ink-3)}
@@ -475,7 +486,7 @@ body:has(.done) .ft{padding-bottom:56px}
 .trust h3{font-size:28px;font-weight:900;letter-spacing:-.035em;line-height:1.25}
 @media (max-width:899px){ .trust h3{font-size:24px} }   /* 바로 아래 구역 제목(30px)과 크기가 겹쳐 구역 시작이 흐려지지 않게 */
 /* 신뢰 목록은 이미지(graphics/trust.html) + 걸 수 있는 전화번호 글자 링크 */
-.trust .trust-img{margin-top:22px;max-width:460px}
+.trust .trust-img{margin-top:0;max-width:460px}
 @media (min-width:700px) and (max-width:899px){ .trust .trust-img{max-width:560px} }
 .tel-big{display:inline-block;margin-top:14px;font-size:clamp(44px,5.2vw,64px);font-weight:900;letter-spacing:-.045em;line-height:1;color:var(--ink);white-space:nowrap}
 @media (hover:hover) and (pointer:fine){ .tel-big:hover{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em} }
@@ -535,7 +546,9 @@ body:has(.done) .ft{padding-bottom:56px}
 .pline .pl-n{font-size:clamp(20px,2vw,24px);font-weight:800;color:#fff;letter-spacing:-.03em}
 .pline .price strong{font-size:clamp(72px,9vw,132px);color:#fff}
 .pline .fine{margin-top:10px;color:#E8ECFF}
-.feat .cta{margin-top:auto;padding-top:32px}
+.feat{justify-content:center}
+.feat>.pline:first-child{margin-top:0;padding-top:0;border-top:0}   /* 위 제목·목록을 뺐으므로 구분선 없이 시작 */
+.feat .cta{margin-top:0;padding-top:32px}
 @media (min-width:700px){ .feat{border-radius:36px;padding:44px} }
 @media (min-width:1200px){ .feat{border-radius:44px} }
 @media (min-width:700px){
@@ -598,11 +611,14 @@ body:has(.done) .ft{padding-bottom:56px}
 /* 네 칸은 가장 긴 항목이 한 줄에 들어가는 폭에서만 */
 @media (min-width:1440px){ .incl{grid-template-columns:repeat(4,1fr)} .incl li{min-height:80px;padding:18px 16px;font-size:16px;letter-spacing:-.03em} }
 
+/* 포스기 세트 패널: 패키지 사진을 빼서 한 칸으로 */
+@media (min-width:700px){ .panel{grid-template-columns:minmax(0,1fr)} }
+
 /* ---------- 배달 통합 ---------- */
-.deliv .tags{margin-top:20px}
+.deliv .tags{margin:0 0 16px}
 .dchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .dchips span{background:var(--soft);border-radius:999px;padding:9px 16px;font-size:16px;font-weight:800;letter-spacing:-.02em}
-.deliv .dchips+.fine{margin-top:22px;color:var(--ink-3)}
+.deliv .h2+.fine{margin-top:18px;color:var(--ink-3)}
 .dv{margin-top:48px;background:var(--soft);border-radius:28px;padding:28px 20px 20px;overflow:hidden}
 .logos{display:flex;justify-content:center;gap:12px}
 .logos i{width:30%;max-width:132px;aspect-ratio:1;border-radius:24%;background:#fff url(img/delivery-logos.jpg) 0 50%/319% auto no-repeat;background-image:image-set("img/delivery-logos-510.webp" type("image/webp"),"img/delivery-logos.jpg" type("image/jpeg"));box-shadow:0 18px 30px -18px rgba(11,13,18,.45)}
@@ -784,7 +800,14 @@ details[open]>summary .pl{transform:rotate(45deg);background:var(--orange)}
   .fs-r .slab{border-radius:56px}
 }
 
+/* 마지막 구역: 폼 대신 버튼(위의 폼으로 간다) + 전화·카톡 */
+.close .end{position:static;padding:0}
+.close .end .h2{margin-bottom:0}
+.end .lead{margin-top:14px}
+.end-cta{display:grid;gap:10px;margin-top:28px;max-width:520px}
+
 /* ---------- 본사·다점포 ---------- */
+.hq-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px;max-width:520px}
 .hq{padding-top:0}
 .hq .cards{align-items:stretch}
 /* 한 카드만 펼치면 각자 높이(닫힌 카드에 빈자리가 생기지 않는다). 둘 다 닫혔거나 둘 다 펼치면 높이·버튼 줄을 맞춘다 */
@@ -813,6 +836,7 @@ details[open]>summary .pl{transform:rotate(45deg);background:var(--orange)}
 .ft-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px 12px}
 .ft-co{grid-column:1/-1}
 .ft-co img{width:auto;height:26px;margin-bottom:16px;filter:brightness(0) invert(1)}
+.ft-co a{display:inline-block;padding:12px 0;color:#fff;text-decoration:underline;text-underline-offset:3px}
 .ft h3{margin-bottom:4px;font-size:15px;font-weight:800;color:#fff}
 .ft li a{display:flex;align-items:center;min-height:48px;font-weight:600;white-space:nowrap;color:rgba(255,255,255,.8)}
 @media (max-width:399px){ .ft li a{font-size:14.5px;letter-spacing:-.03em} }
@@ -1187,7 +1211,7 @@ if(META_PIXEL_ID){
       <a href="#faq">자주 묻는 질문</a>
     </nav>
     <a class="btn-o" href="tel:15442485" data-loc="v2-헤더" aria-label="전화 1544-2485"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg><span class="tel-short">전화</span><span class="tel-long">1544-2485</span></a>
-    <a class="btn-k hd-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-헤더">카카오톡 상담</a>
+    <a class="btn-k hd-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-헤더" aria-label="카카오톡 상담"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.2 4.5 6.6L5.5 21l4.1-2.3c.8.1 1.6.2 2.4.2 5.5 0 10-3.6 10-8s-4.5-8-10-8z"/></svg><span class="kt">카카오톡 상담</span></a>
     <a class="btn" href="posmos-apply.html?from=v2-헤더" data-from="v2-헤더" data-offer="unknown" data-target="near">무료 상담</a>
   </div>
 </header>
@@ -1196,7 +1220,7 @@ if(META_PIXEL_ID){
 <!-- ================= 히어로 ================= -->
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="kicker">토스플레이스 공식 파트너 · 1만 가맹점의 선택</p>
+    <p class="kicker">토스플레이스 공식 파트너 · 1만 가맹점</p>
     <h1 class="h1" id="h1">
       <span class="ln"><span class="mask"><span class="in">쓰던 태블릿·휴대폰에</span></span></span>
       <span class="ln"><span class="mask"><span class="in">토스프론트만 연결하면</span></span></span>
@@ -1204,20 +1228,13 @@ if(META_PIXEL_ID){
     </h1>
     <div class="hero-grid">
       <div class="hero-body">
-        <p class="sub">토스프론트는 무료, 인터넷은 쓰던 그대로.</p>
-        <ul class="points">
-          <li>설치비 <b>0원</b></li><li>관리비 <b>0원</b></li><li>기기값 <b>0원</b></li>
-        </ul>
+        <ul class="points"><li>설치비·관리비·기기값 <b>0원</b></li></ul>
+        <p class="note">토스프론트 무료 제공 이벤트 중</p>
         <div class="cta">
-          <a class="btn xl" id="hero-cta" href="posmos-apply.html?from=v2-히어로-0원" data-from="v2-히어로-0원" data-offer="zero" data-target="top">내 매장도 0원 되는지 확인하기
+          <a class="btn xl" id="hero-cta" href="posmos-apply.html?from=v2-히어로-0원" data-from="v2-히어로-0원" data-offer="zero" data-target="top">0원 되는지 확인하기
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <div class="cta-2">
-            <a class="btn-o" href="tel:15442485" data-loc="v2-히어로">전화 1544-2485</a>
-            <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-히어로">카카오톡 상담</a>
-          </div>
         </div>
-        <p class="note"><span class="nb">영업일 9시~18시</span> 기준 1시간 안에 전화드립니다.</p>
       </div>
       <div class="stage" id="stage">
         <div class="slab"></div>
@@ -1385,29 +1402,24 @@ if(META_PIXEL_ID){
   <div class="wipe-o" id="wipeO" aria-hidden="true"></div>
   <section class="choose" id="wipeB">
     <div class="wrap">
-      <h2 class="h2 rv-h"><span class="ln"><span class="in">사장님 매장은 어느 쪽이세요?</span></span></h2>
+      <h2 class="h2 rv-h"><span class="ln"><span class="in">어느 쪽이세요?</span></span></h2>
       <div class="cards">
         <article class="card card-a">
-          <span class="tag">① 쓰던 기기로 0원</span>
-          <h3>쓰던 태블릿·휴대폰 + 토스프론트</h3>
+          <span class="tag">① 쓰던 기기로</span>
           <p class="price"><strong>0원</strong><span class="nb">설치비·관리비·기기값</span></p>
-          <p class="fine">토스프론트는 사업자 무료 제공 이벤트 진행 중</p>
-          <img class="gfx" src="img/g-card-a.webp" width="300" height="263" alt="쓰던 태블릿·휴대폰과 토스프론트를 합치면 포스가 됩니다. 월 이용료, 보증금, 가입비가 없고 인터넷을 새로 가입하지 않아도 됩니다." loading="lazy" decoding="async">
+          <p class="fine">토스프론트 무료 제공 이벤트 중</p>
+          <img class="gfx" src="img/g-card-a.webp" width="300" height="263" alt="쓰던 기기와 토스프론트를 합치면 포스가 됩니다. 월 이용료, 보증금, 가입비가 없고 인터넷은 쓰던 그대로 씁니다." loading="lazy" decoding="async">
           <a class="btn" href="posmos-apply.html?from=v2-선택-0원" data-from="v2-선택-0원" data-offer="zero" data-target="top">0원 되는지 확인하기</a>
         </article>
         <article class="card card-b">
-          <span class="tag">② 포스기 세트까지 한 번에</span>
-          <h3>인터넷 + CCTV + 포스기 세트</h3>
+          <span class="tag">② 포스기 세트로</span>
           <p class="price"><strong>월 34,000원</strong><s>정가 43,000원</s></p>
-          <p class="fine"><span class="nb">LGU+ 모바일 결합 시</span> · <span class="nb">부가세 별도</span><span class="sep"> · </span><span class="nb">신규·기존 이용자 모두 가능</span></p>
-          <img class="gfx" src="img/g-card-b.webp" width="300" height="263" alt="인터넷 500M, CCTV, 포스기 본체, 토스프론트를 드리고, 영수증프린터·금전함·키보드·마우스도 함께 무상으로 드립니다." loading="lazy" decoding="async">
-          <a class="btn wh" href="posmos-apply.html?from=v2-선택-세트" data-from="v2-선택-세트" data-offer="set" data-target="top">포스기 세트 상담받기</a>
-          <a class="lnk" href="#allinone">구성 자세히 보기</a>
+          <p class="fine"><span class="nb">LGU+ 모바일 결합 시</span> · <span class="nb">부가세 별도</span></p>
+          <img class="gfx" src="img/g-card-b.webp" width="300" height="248" alt="인터넷 500M, CCTV, 포스기, 토스프론트" loading="lazy" decoding="async">
+          <a class="btn wh" href="posmos-apply.html?from=v2-선택-세트" data-from="v2-선택-세트" data-offer="set" data-target="top">세트 상담받기</a>
         </article>
       </div>
-      <div class="exit">
-        <a class="btn-o" href="posmos-apply.html?from=v2-선택-모름" data-from="v2-선택-모름" data-offer="unknown" data-target="top">잘 모르겠어요, 상담으로 확인하기</a>
-      </div>
+      <p class="choose-note">카드 결제 수수료는 포스 비용과 별도예요.</p>
     </div>
   </section>
 </div>
@@ -1418,7 +1430,7 @@ if(META_PIXEL_ID){
     <div class="formstage fs-l" id="fs-top">
       <div class="slab"></div>
       <div class="fc" id="fc-top">
-        <h3 class="fc-t"><span>전화번호와 지역만 남기세요.</span> <span>0원 되는지 알려드립니다.</span></h3>
+        <h3 class="fc-t"><span>번호랑 지역만 주세요</span> <span>0원 되는지 알려드려요.</span></h3>
         <form id="form-top" action="https://formspree.io/f/xgobbwjd" method="POST">
           <input type="hidden" name="신청 버튼" value="v2-상단폼-직접입력(스크립트 없음)">
           <fieldset class="chips">
@@ -1433,48 +1445,28 @@ if(META_PIXEL_ID){
             <p class="err" id="e-phone-top" aria-live="polite"></p>
           </div>
           <div class="fld">
-            <label for="region-top">매장 지역 (시·구까지)</label>
+            <label for="region-top">매장 지역</label>
             <input id="region-top" name="지역" type="text" autocomplete="address-level2" placeholder="예) 의정부, 서울 강남" required aria-describedby="e-region-top">
             <p class="err" id="e-region-top" aria-live="polite"></p>
           </div>
-          <label class="agree" for="agree-top"><input type="checkbox" id="agree-top" required aria-describedby="e-agree-top"><span>(필수) <a href="posmos-privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>에 동의하며, 상담 목적으로 연락받는 것에 동의합니다.</span></label>
+          <label class="agree" for="agree-top"><input type="checkbox" id="agree-top" required aria-describedby="e-agree-top"><span>(필수) <span class="nb"><a href="posmos-privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>과</span> 상담 연락에 동의합니다.</span></label>
           <p class="err" id="e-agree-top" aria-live="polite"></p>
           <p class="err" id="e-send-top" aria-live="polite"></p>
           <button class="btn xl" type="submit">0원 되는지 확인받기</button>
         </form>
         <ul class="prom">
-          <li><span class="nb">영업일 9시~18시엔</span> 1시간 안에, 저녁·주말엔 <span class="nb">다음 영업일에</span> 전화드립니다.</li>
-          <li>상담만 받고 안 하셔도 됩니다.</li>
-          <li>남기신 번호는 상담 연락과 <span class="nb">서비스 안내에만</span> 씁니다.</li>
+          <li><span class="nb">영업일 9~18시엔</span> 1시간 안에 전화드려요. <span class="nb">저녁·주말엔 다음 영업일.</span></li>
+          <li>번호는 상담·서비스 안내에만 써요.</li>
         </ul>
-        <p class="or">전화나 카카오톡이 편하시면</p>
         <div class="btn2">
           <a class="btn-o" href="tel:15442485" data-loc="v2-상단폼">전화 1544-2485</a>
-          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-상단폼">카카오톡 상담</a>
+          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-상단폼">카톡 상담</a>
         </div>
       </div>
     </div>
     <div class="trust">
-      <h3>포스모스에 맡기면</h3>
-      <img class="gfx trust-img" src="img/g-trust.webp" width="335" height="422" alt="1만 가맹점의 선택. 토스플레이스 공식 파트너. 서류는 포스모스가 카드사 가맹 서류를 대행합니다. 고장 나면 원격으로 해결하고 필요하면 방문합니다." loading="lazy" decoding="async">
+      <img class="gfx trust-img" src="img/g-trust.webp" width="335" height="422" alt="1만 가맹점의 선택. 토스플레이스 공식 파트너. 카드사 가맹 서류는 저희가 대행합니다. 고장 나면 원격으로 해결하고 필요하면 방문합니다." loading="lazy" decoding="async">
       <a class="tel-big" href="tel:15442485" data-loc="v2-신뢰">1544-2485</a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 돈 얘기 ================= -->
-<section class="sec money" id="money">
-  <div class="wrap mg">
-    <h2 class="h2 rv-h"><span class="ln"><span class="in">돈 얘기부터 먼저 말씀드립니다.</span></span></h2>
-    <div>
-      <picture>
-        <source type="image/webp" media="(min-width:700px)" srcset="img/g-money-w.webp" width="700" height="480">
-        <img class="gfx money-img" src="img/g-money.webp" width="335" height="722" alt="쓰던 기기와 토스프론트로 시작하면 설치비·관리비·기기값 0원이고, 월 이용료·보증금·가입비가 없으며 인터넷을 새로 가입하지 않아도 됩니다. 태블릿·휴대폰 모두 가능합니다. 포스기 세트는 월 34,000원에 인터넷·CCTV·포스기 본체가 포함됩니다." loading="lazy" decoding="async">
-      </picture>
-      <p class="fine money-cond">월 34,000원은 <span class="nb">LGU+ 모바일 결합 시,</span> <span class="nb">정가 43,000원,</span> <span class="nb">부가세 별도</span>입니다.<br><span class="nb">카드 결제 수수료는 포스 비용과 별도입니다.</span></p>
-      <div class="cta">
-        <a class="btn xl" href="posmos-apply.html?from=v2-돈얘기" data-from="v2-돈얘기" data-offer="unknown" data-target="top">내 매장도 0원 되는지 확인하기</a>
-      </div>
     </div>
   </div>
 </section>
@@ -1483,11 +1475,10 @@ if(META_PIXEL_ID){
 <section class="sec zero" id="zero">
   <span id="tossfront" class="anchor"></span>
   <div class="wrap">
-    <h2 class="h2 rv-h"><span class="ln"><span class="in">쓰던 기기에 토스프론트만 연결하면,</span></span> <span class="ln"><span class="in">그게 포스입니다.</span></span></h2>
-    <p class="lead">사업자라면 토스프론트를 무료로 받을 수 있습니다(무료 제공 이벤트 진행 중).</p>
+    <h2 class="h2 rv-h"><span class="ln"><span class="in">기기 새로 안 사셔도 돼요.</span></span></h2>
     <picture>
       <source type="image/webp" media="(min-width:700px)" srcset="img/g-zero-flow-w.webp" width="760" height="397">
-      <img class="gfx flow-img" src="img/g-zero-flow.webp" width="335" height="305" alt="1 쓰던 태블릿·휴대폰 준비(새로 사지 않아도 됩니다), 2 토스프론트 연결(담당자가 안내), 3 결제 받기(카드, 애플페이·카카오페이·토스페이)" loading="lazy" decoding="async">
+      <img class="gfx flow-img" src="img/g-zero-flow.webp" width="335" height="305" alt="1 쓰던 기기, 2 토스프론트 연결(담당자가 안내), 3 결제 받기: 카드, 애플페이, 카카오페이, 토스페이" loading="lazy" decoding="async">
     </picture>
     <div class="zg">
       <div class="zm">
@@ -1505,11 +1496,9 @@ if(META_PIXEL_ID){
         </div>
       </div>
       <div class="feat">
-        <h3>토스프론트가 하는 일</h3>
-        <img class="gfx feats-img" src="img/g-zero-feats.webp" width="300" height="280" alt="토스프론트가 하는 일: 실시간 주문 표시, 결제 금액 안내, 간편결제, 키오스크 기능, 포인트 적립·사용, 브랜드 로고·홍보 이미지 설정, 포스와 자동 연동" loading="lazy" decoding="async">
         <div class="pline">
           <p class="price"><span class="pl-n">토스프론트</span> <strong>무료<i class="stop" aria-hidden="true"></i></strong></p>
-          <p class="fine">사업자 대상 무료 제공 이벤트 진행 중</p>
+          <p class="fine">사업자 무료 제공 이벤트 중</p>
         </div>
         <div class="cta">
           <a class="btn wh xl" href="posmos-apply.html?from=v2-0원상세" data-from="v2-0원상세" data-offer="zero" data-target="near">내 기기로 되는지 확인하기</a>
@@ -1525,32 +1514,20 @@ if(META_PIXEL_ID){
   <div class="wrap">
     <div class="panel" id="panel">
       <div class="pa">
-        <h2 class="h2 rv-h"><span class="ln"><span class="in">인터넷·CCTV·포스기를</span></span> <span class="ln"><span class="in">한 번에.</span></span></h2>
+        <h2 class="h2 rv-h"><span class="ln"><span class="in">인터넷·CCTV도</span></span> <span class="ln"><span class="in">한 번에</span></span></h2>
         <div class="pblock">
           <p class="price"><strong>월 34,000원</strong><s>정가 43,000원</s></p>
           <p class="fine">LGU+ 모바일 결합 시 · 부가세 별도</p>
           <p class="fine"><span class="nb">신규·기존 이용자</span> 모두 가능</p>
         </div>
       </div>
-      <div class="pk">
-        <picture>
-          <source type="image/webp" srcset="img/package-640.webp 640w, img/package-1080.webp 1080w" sizes="(min-width:1400px) 390px, (min-width:900px) 32vw, (min-width:700px) 70vw, 100vw">
-          <img src="img/package.jpg" width="1080" height="1044" alt="인터넷부터 포스기까지 한 번에 받는 포스기 패키지 안내 이미지" loading="lazy" decoding="async">
-        </picture>
-        <ul class="tri">
-          <li><picture><source type="image/webp" srcset="img/bundle-internet-240.webp"><img src="img/bundle-internet.jpg" width="360" height="360" alt="" loading="lazy" decoding="async"></picture>인터넷 500M</li>
-          <li><picture><source type="image/webp" srcset="img/bundle-cctv-240.webp"><img src="img/bundle-cctv.jpg" width="800" height="800" alt="" loading="lazy" decoding="async"></picture>CCTV</li>
-          <li><picture><source type="image/webp" srcset="img/bundle-phone-240.webp"><img src="img/bundle-phone.jpg" width="632" height="677" alt="" loading="lazy" decoding="async"></picture>AI전화</li>
-        </ul>
-      </div>
       <div class="pb">
         <picture class="incl-pic">
           <source type="image/webp" media="(min-width:700px)" srcset="img/g-set-incl-w.webp" width="880" height="423">
-          <img class="gfx incl-img" src="img/g-set-incl.webp" width="300" height="654" alt="월 34,000원에 들어 있는 것: 인터넷 500M + WiFi + AI전화, CCTV + 월 2회 무료 출동, 최신형 포스기 본체, 토스프론트 카드단말기, 배달 3사 통합프로그램, 회원관리 프로그램, 카드사 가맹 대행, A/S + 고객센터. 영수증프린터·금전함·키보드·마우스도 함께 무상 제공." loading="lazy" decoding="async">
+          <img class="gfx incl-img" src="img/g-set-incl.webp" width="300" height="654" alt="월 34,000원에 들어 있는 것: 인터넷 500M + AI전화, CCTV + 월 2회 무료 출동, 포스기 본체, 토스프론트, 배달 3사 통합, 회원관리, 카드사 가맹 대행, A/S·고객센터. 함께 무상 제공: 영수증프린터, 금전함, 키보드, 마우스." loading="lazy" decoding="async">
         </picture>
         <div class="cta">
-          <a class="btn wh xl" href="posmos-apply.html?from=v2-세트상세" data-from="v2-세트상세" data-offer="set" data-target="near">포스기 세트 상담받기</a>
-          <p class="fine">지금 쓰는 포스기 약정이 남아 있어도, 바꾸는 방법을 상담에서 안내해 드립니다.</p>
+          <a class="btn wh xl" href="posmos-apply.html?from=v2-세트상세" data-from="v2-세트상세" data-offer="set" data-target="near">세트 상담받기</a>
         </div>
       </div>
     </div>
@@ -1562,18 +1539,15 @@ if(META_PIXEL_ID){
   <span id="services" class="anchor"></span>
   <div class="wrap dg">
     <div>
-      <h2 class="h2 rv-h"><span class="ln"><span class="in">배민·쿠팡이츠·요기요,</span></span> <span class="ln"><span class="in">포스 한 화면에서.</span></span></h2>
-      <p class="lead">통합 프로그램을 무료로 제공합니다.</p>
       <p class="tags"><span class="tag or">국내 최초 무료</span></p>
-      <p class="dchips"><span>매출 통합</span><span>품절 즉시 반영</span><span>내점·배달 통합</span></p>
-      <p class="fine">쓰던 기기로 0원 시작하는 경우의 배달 통합 범위는 상담에서 확인해 드립니다.</p>
+      <h2 class="h2 rv-h"><span class="ln"><span class="in">배달앱 3개,</span></span> <span class="ln"><span class="in">화면은 1개.</span></span></h2>
+      <p class="fine">0원 시작 시 통합 범위는 상담에서 확인</p>
       <div class="cta">
-        <a class="btn xl" href="posmos-apply.html?from=v2-배달통합" data-from="v2-배달통합" data-offer="unknown" data-target="near" data-topic="배달 연동">배달 연동 상담받기</a>
+        <a class="btn xl" href="posmos-apply.html?from=v2-배달통합" data-from="v2-배달통합" data-offer="unknown" data-target="near" data-topic="배달 연동">배달 연동 상담</a>
       </div>
     </div>
     <div class="dv" id="dv">
       <div class="logos" role="img" aria-label="배달의민족, 요기요, 쿠팡이츠 로고"><i></i><i></i><i></i></div>
-      <p class="to1" aria-hidden="true">3 <span>→</span> 1</p>
       <div class="pos"><picture><source type="image/webp" srcset="img/delivery-pos-640.webp 640w, img/delivery-pos-1100.webp 1100w" sizes="(min-width:1400px) 520px, (min-width:900px) 38vw, 100vw"><img src="img/delivery-pos.jpg" width="1400" height="1018" alt="포스 화면에서 배달의민족 주문을 확인하고 주문서를 출력하는 모습" loading="lazy" decoding="async"></picture></div>
     </div>
   </div>
@@ -1590,14 +1564,13 @@ if(META_PIXEL_ID){
   <span id="qrorder" class="anchor"></span><span id="tableorder" class="anchor"></span><span id="kiosk" class="anchor"></span>
   <div class="wrap">
     <h2 class="h2 rv-h"><span class="ln"><span class="in">주문 받을 손이 부족할 때</span></span></h2>
-    <p class="lead">필요한 것만 골라 추가하세요.</p>
     <div class="bento" id="bento">
       <article class="tile t-qr">
         <div class="tx">
           <p class="nm">QR오더</p>
           <p class="p">무료</p>
-          <h3>QR 스티커만 붙이면 끝</h3>
-          <a class="btn dk" href="posmos-apply.html?from=v2-옵션-QR오더" data-from="v2-옵션-QR오더" data-offer="unknown" data-target="near" data-topic="QR오더">QR오더 상담받기</a>
+          <h3>스티커만 붙이면 끝</h3>
+          <a class="btn dk" href="posmos-apply.html?from=v2-옵션-QR오더" data-from="v2-옵션-QR오더" data-offer="unknown" data-target="near" data-topic="QR오더" aria-label="QR오더 상담받기">상담받기</a>
         </div>
         <div class="ph"><picture><source type="image/webp" srcset="img/qr-1-640.webp 640w, img/qr-1-1200.webp 1200w" sizes="(min-width:1400px) 600px, (min-width:700px) 46vw, 100vw"><img src="img/qr-1.jpg" width="1400" height="934" alt="카페 테이블 위에 놓인 QR 주문 스티커" loading="lazy" decoding="async"></picture></div>
       </article>
@@ -1605,8 +1578,7 @@ if(META_PIXEL_ID){
         <div class="tx">
           <p class="nm">테이블오더 <span class="tag">국내 최저가</span></p>
           <p class="p">월 10,000원~</p>
-          <h3>테이블에서 바로 주문</h3>
-          <a class="btn" href="posmos-apply.html?from=v2-옵션-테이블오더" data-from="v2-옵션-테이블오더" data-offer="unknown" data-target="near" data-topic="테이블오더">테이블오더 상담받기</a>
+          <a class="btn" href="posmos-apply.html?from=v2-옵션-테이블오더" data-from="v2-옵션-테이블오더" data-offer="unknown" data-target="near" data-topic="테이블오더" aria-label="테이블오더 상담받기">상담받기</a>
         </div>
         <div class="ph"><picture><source type="image/webp" srcset="img/table-3-696.webp"><img src="img/table-3.jpg" width="696" height="332" alt="테이블에 설치된 주문용 태블릿" loading="lazy" decoding="async"></picture></div>
       </article>
@@ -1614,9 +1586,8 @@ if(META_PIXEL_ID){
         <div class="tx">
           <p class="nm">키오스크</p>
           <p class="p">월 45,000원~</p>
-          <h3>21인치 큰 화면 키오스크</h3>
-          <p class="spec">RAM 8GB · SSD 128GB</p>
-          <a class="btn wh" href="posmos-apply.html?from=v2-옵션-키오스크" data-from="v2-옵션-키오스크" data-offer="unknown" data-target="near" data-topic="키오스크">키오스크 상담받기</a>
+          <p class="spec">21인치 · RAM 8GB · SSD 128GB</p>
+          <a class="btn wh" href="posmos-apply.html?from=v2-옵션-키오스크" data-from="v2-옵션-키오스크" data-offer="unknown" data-target="near" data-topic="키오스크" aria-label="키오스크 상담받기">상담받기</a>
         </div>
         <div class="ph"><img src="img/kiosk-1-600.webp" width="600" height="1133" alt="토스 키오스크 주문 화면" loading="lazy" decoding="async"></div>
       </article>
@@ -1627,24 +1598,21 @@ if(META_PIXEL_ID){
 <!-- ================= 도입 과정 ================= -->
 <section class="sec process" id="process">
   <div class="wrap">
-    <h2 class="h2 rv-h"><span class="ln"><span class="in">서류도, 카드사 가맹도</span></span> <span class="ln"><span class="in">포스모스가 대신 합니다.</span></span></h2>
-    <p class="fine basis">포스기 세트 기준 보통 신청 후 <span class="nb">2주 이내</span> 완료 · 쓰던 기기로 0원 시작은 상담에서 안내합니다.</p>
+    <h2 class="h2 rv-h"><span class="ln"><span class="in">보통 2주면</span></span> <span class="ln"><span class="in">설치 끝.</span></span></h2>
+    <p class="fine basis">신청 후 · 포스기 세트 기준</p>
+    <p class="lead">카드사 가맹까지 저희가 해요.</p>
     <div class="pg">
       <div>
         <ol class="proc" id="proc">
-          <li><span class="slot" aria-hidden="true"><b>1</b></span><div><h3>상담 신청</h3><span class="tag">당일~1영업일</span></div></li>
-          <li><span class="slot" aria-hidden="true"><b>2</b></span><div><h3>서류 및 가맹 처리</h3><span class="tag">1~3영업일</span></div></li>
-          <li><span class="slot" aria-hidden="true"><b>3</b></span><div><h3>인터넷·CCTV 설치</h3><span class="tag">3~5영업일</span></div></li>
-          <li><span class="slot" aria-hidden="true"><b>4</b></span><div><h3>포스기 설치 및 교육</h3><span class="tag">설치 당일</span></div></li>
-          <li><span class="slot" aria-hidden="true"><b>5</b></span><div><h3>운영 시작</h3><span class="tag">설치 완료 즉시</span></div></li>
+          <li><span class="slot" aria-hidden="true"><b>1</b></span><div><h3>상담 신청</h3></div></li>
+          <li><span class="slot" aria-hidden="true"><b>2</b></span><div><h3>서류·가맹 대행</h3></div></li>
+          <li><span class="slot" aria-hidden="true"><b>3</b></span><div><h3>인터넷·CCTV 설치</h3></div></li>
+          <li><span class="slot" aria-hidden="true"><b>4</b></span><div><h3>포스기 설치·교육</h3></div></li>
+          <li><span class="slot" aria-hidden="true"><b>5</b></span><div><h3>운영 시작</h3></div></li>
         </ol>
-        <div class="cta">
-          <a class="btn xl" href="posmos-apply.html?from=v2-도입과정" data-from="v2-도입과정" data-offer="unknown" data-target="bottom">내 매장도 0원 되는지 확인하기</a>
-        </div>
       </div>
       <figure class="ps">
         <span class="ps-f"><picture><source type="image/webp" srcset="img/process-status-680.webp"><img src="img/process-status.jpg" width="680" height="684" alt="설치 진행 상황을 단계별로 보여주는 화면" loading="lazy" decoding="async"></picture></span>
-        <figcaption>진행 상황 확인 화면</figcaption>
       </figure>
     </div>
   </div>
@@ -1659,32 +1627,17 @@ if(META_PIXEL_ID){
     <div>
       <div class="faq">
         <details>
-          <summary>다른 포스기를 쓰고 있어도 바꿀 수 있나요?<i class="pl" aria-hidden="true"></i></summary>
-          <p>네, 가능합니다. 기존 포스기 약정이 끝났거나 약정이 없으면 바로 전환할 수 있고, 약정 중인 경우에도 상담을 통해 방법을 안내해 드립니다.</p>
+          <summary>다른 포스기 써도 바꿀 수 있나요?<i class="pl" aria-hidden="true"></i></summary>
+          <p>네. 약정이 끝났거나 없으면 바로 바꾸고, 약정 중이어도 방법을 안내해 드려요.</p>
         </details>
         <details>
-          <summary>설치까지 얼마나 걸리나요?<i class="pl" aria-hidden="true"></i></summary>
-          <p>포스기 세트 기준으로 서류 처리 1~3영업일, 인터넷·CCTV 설치 3~5영업일이 걸리고, 포스기 설치는 인터넷 설치가 끝나면 바로 진행합니다. 보통 상담 신청 후 2주 이내에 전체 설치가 끝납니다.</p>
+          <summary>고장 나면요?<i class="pl" aria-hidden="true"></i></summary>
+          <p>1544-2485나 카톡으로 접수하세요. 원격으로 안 되면 기사가 방문해요.</p>
         </details>
         <details>
-          <summary>고장 나면 어떻게 하나요?<i class="pl" aria-hidden="true"></i></summary>
-          <p>1544-2485나 카카오 채널로 접수하세요. 원격으로 해결되는 경우 바로 처리하고, 방문이 필요하면 기사가 방문해 A/S를 진행합니다.</p>
+          <summary>인터넷이 없어도 되나요?<i class="pl" aria-hidden="true"></i></summary>
+          <p>네. 인터넷·CCTV·포스기를 한 번에 받는 포스기 세트가 맞아요.</p>
         </details>
-        <details>
-          <summary>배달 연동은 어떤 앱을 지원하나요?<i class="pl" aria-hidden="true"></i></summary>
-          <p>배달의민족, 쿠팡이츠, 요기요를 지원합니다. 배민 입점 지원과 전담 매니저 연결도 무료로 제공합니다.</p>
-        </details>
-        <details>
-          <summary>인터넷이 없는 매장도 신청할 수 있나요?<i class="pl" aria-hidden="true"></i></summary>
-          <p>네, 가능합니다. 인터넷이 없는 매장은 인터넷·CCTV·포스기를 한 번에 받는 포스기 세트가 맞습니다.</p>
-        </details>
-      </div>
-      <div class="faq-end">
-        <p>여기 없는 질문은 전화나 카카오톡으로 물어보세요.</p>
-        <div class="btn2">
-          <a class="btn-o" href="tel:15442485" data-loc="v2-FAQ">전화 1544-2485</a>
-          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-FAQ">카카오톡 상담</a>
-        </div>
       </div>
     </div>
   </div>
@@ -1694,99 +1647,26 @@ if(META_PIXEL_ID){
 <section class="sec hq" id="hq">
   <span id="supply" class="anchor"></span><span id="devrequest" class="anchor"></span>
   <div class="wrap">
-    <h2 class="h2 rv-h"><span class="ln"><span class="in">매장이 여러 곳이신가요?</span></span></h2>
-    <div class="cards">
-      <article class="card">
-        <h3>운영 방식에 맞춘 수발주 프로그램</h3>
-        <p>본사와 가맹점의 운영 방식에 맞춰 발주, 결제, 재고, 정산까지 맞춤 개발합니다. 필요한 기능만 골라 확장할 수 있습니다.</p>
-        <details>
-          <summary>적합한 곳과 기능 보기<i class="pl" aria-hidden="true"></i></summary>
-          <h4>이런 본사·매장에 맞습니다</h4>
-          <ul class="bul">
-            <li>2개 이상 매장·가맹점을 운영 중</li>
-            <li>기존 발주 방식이 매장·본사 상황과 맞지 않는 경우</li>
-            <li>우리만의 발주 흐름대로 시스템을 맞추고 싶은 경우</li>
-          </ul>
-          <h4>개발 가능한 기능 예시</h4>
-          <ul class="bul">
-            <li>가맹점별 실시간 발주 현황 관리</li>
-            <li>발주 대금 결제 연동(결제대기·완료 자동 동기화)</li>
-            <li>판매량 대비 과다 발주·폐기 리스크 알림</li>
-            <li>매장별 재고 원장·정산 자동화</li>
-            <li>엑셀 다운로드, 감사 로그 등 추가 개발</li>
-          </ul>
-        </details>
-        <a class="btn dk" href="posmos-apply.html?from=v2-본사-수발주" data-from="v2-본사-수발주" data-offer="hq-supply" data-target="bottom">수발주 개발 문의하기</a>
-      </article>
-      <article class="card">
-        <h3>오프라인 단골을 온라인 고객으로</h3>
-        <p>오프라인 매장을 운영 중인 사장님의 온라인몰 개발, PG 결제 연동, 초기 운영 지원까지 함께합니다.</p>
-        <details>
-          <summary>적합한 곳과 제공 내용 보기<i class="pl" aria-hidden="true"></i></summary>
-          <h4>이런 매장에 맞습니다</h4>
-          <ul class="bul">
-            <li>오프라인 매장을 이미 운영 중</li>
-            <li>온라인 매출을 늘리려는 사장님</li>
-            <li>포스모스 결제·운영 시스템과 함께 갈 매장</li>
-          </ul>
-          <h4>제공 내용</h4>
-          <ul class="bul">
-            <li>온라인몰(쇼핑몰) 개발</li>
-            <li>PG 결제 연동</li>
-            <li>초기 운영 지원 및 관리자 사용 교육</li>
-            <li>매장-온라인 매출 통합 지원</li>
-            <li>VAN 연계 확장</li>
-            <li>무상·유상 개발 여부는 상담에서 안내</li>
-          </ul>
-        </details>
-        <a class="btn dk" href="posmos-apply.html?from=v2-본사-개발문의" data-from="v2-본사-개발문의" data-offer="hq-dev" data-target="bottom">온라인몰 개발 문의하기</a>
-      </article>
+    <h2 class="h2 rv-h"><span class="ln"><span class="in">매장이 여러 곳이세요?</span></span></h2>
+    <p class="lead">수발주 맞춤 개발 · 온라인몰 개발</p>
+    <div class="hq-btns">
+      <a class="btn dk" href="posmos-apply.html?from=v2-본사-수발주" data-from="v2-본사-수발주" data-offer="hq-supply" data-target="top">수발주 문의</a>
+      <a class="btn dk" href="posmos-apply.html?from=v2-본사-개발문의" data-from="v2-본사-개발문의" data-offer="hq-dev" data-target="top">온라인몰 문의</a>
     </div>
   </div>
 </section>
 
-<!-- ================= 폼 ② ================= -->
+<!-- ================= 마지막 버튼 구역(폼은 위에 하나) ================= -->
 <section class="sec close" id="apply2">
-  <div class="wrap close-grid">
+  <div class="wrap">
     <div class="end">
-      <h2 class="h2 rv-h" id="h2c"><span class="ln"><span class="in">어느 쪽이 맞는지는</span></span> <span class="ln"><span class="in">포스모스가 확인해 <span style="white-space:nowrap">드립니다<i class="stop" id="stop2" aria-hidden="true"></i></span></span></span></h2>
-    </div>
-    <div class="formstage fs-r" id="fs-bottom">
-      <div class="slab"></div>
-      <div class="fc" id="fc-bottom">
-        <h3 class="fc-t"><span>전화번호와 지역만 남기세요.</span> <span>0원 되는지 알려드립니다.</span></h3>
-        <form id="form-bottom" action="https://formspree.io/f/xgobbwjd" method="POST">
-          <input type="hidden" name="신청 버튼" value="v2-하단폼-직접입력(스크립트 없음)">
-          <fieldset class="chips">
-            <legend>관심 있는 쪽 (선택)</legend>
-            <input type="radio" form="chip-only" name="관심-bottom" id="chip-zero-bottom" value="쓰던 기기로 0원" data-o="zero"><label for="chip-zero-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>쓰던 기기로 0원</label>
-            <input type="radio" form="chip-only" name="관심-bottom" id="chip-set-bottom" value="포스기 세트" data-o="set"><label for="chip-set-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>포스기 세트</label>
-            <input type="radio" form="chip-only" name="관심-bottom" id="chip-unknown-bottom" value="잘 모르겠어요" data-o="unknown" checked><label for="chip-unknown-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>잘 모르겠어요</label>
-          </fieldset>
-          <div class="fld">
-            <label for="phone-bottom">전화번호</label>
-            <input id="phone-bottom" name="전화번호" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="010-0000-0000" required aria-describedby="e-phone-bottom">
-            <p class="err" id="e-phone-bottom" aria-live="polite"></p>
-          </div>
-          <div class="fld">
-            <label for="region-bottom">매장 지역 (시·구까지)</label>
-            <input id="region-bottom" name="지역" type="text" autocomplete="address-level2" placeholder="예) 의정부, 서울 강남" required aria-describedby="e-region-bottom">
-            <p class="err" id="e-region-bottom" aria-live="polite"></p>
-          </div>
-          <label class="agree" for="agree-bottom"><input type="checkbox" id="agree-bottom" required aria-describedby="e-agree-bottom"><span>(필수) <a href="posmos-privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>에 동의하며, 상담 목적으로 연락받는 것에 동의합니다.</span></label>
-          <p class="err" id="e-agree-bottom" aria-live="polite"></p>
-          <p class="err" id="e-send-bottom" aria-live="polite"></p>
-          <button class="btn xl" type="submit">0원 되는지 확인받기</button>
-        </form>
-        <ul class="prom">
-          <li><span class="nb">영업일 9시~18시엔</span> 1시간 안에, 저녁·주말엔 <span class="nb">다음 영업일에</span> 전화드립니다.</li>
-          <li>상담만 받고 안 하셔도 됩니다.</li>
-          <li>남기신 번호는 상담 연락과 <span class="nb">서비스 안내에만</span> 씁니다.</li>
-        </ul>
-        <p class="or">전화나 카카오톡이 편하시면</p>
+      <h2 class="h2 rv-h" id="h2c"><span class="ln"><span class="in">내 매장도 0원일까?</span></span></h2>
+      <p class="lead">맞는 쪽은 저희가 봐 드려요.</p>
+      <div class="end-cta">
+        <a class="btn xl" href="posmos-apply.html?from=v2-마지막" data-from="v2-마지막" data-offer="unknown" data-target="top">0원 되는지 확인하기</a>
         <div class="btn2">
-          <a class="btn-o" href="tel:15442485" data-loc="v2-하단폼">전화 1544-2485</a>
-          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-하단폼">카카오톡 상담</a>
+          <a class="btn-o" href="tel:15442485" data-loc="v2-마지막">전화 상담</a>
+          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-마지막">카톡 상담</a>
         </div>
       </div>
     </div>
@@ -1797,43 +1677,15 @@ if(META_PIXEL_ID){
 
 <footer class="ft">
   <div class="wrap">
-    <p class="ft-big"><span class="ft-lb">대표번호</span><a class="ft-tel" href="tel:15442485" data-loc="v2-푸터">1544-2485<i class="stop" aria-hidden="true"></i></a></p>
-    <div class="ft-g">
-      <div class="ft-co">
-        <img src="img/logo.png" alt="포스모스 POSMOS" width="724" height="160" loading="lazy" decoding="async">
-        <p>(주)포스모스 · 대표자: 박은서</p>
-        <p>사업자등록번호: 330-86-02470</p>
-        <p>경기도 의정부시 의정로 16, 4F~5F</p>
-        <p><span class="nb">대표번호: 1544-2485</span> · <span class="nb">info@posmos.net</span></p>
-      </div>
-      <nav aria-label="서비스">
-        <h3>서비스</h3>
-        <ul>
-          <li><a href="#zero">0원 시작</a></li>
-          <li><a href="#allinone">포스기 세트</a></li>
-          <li><a href="#delivery">배달 통합</a></li>
-          <li><a href="#addons">QR오더·테이블오더·키오스크</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="정보">
-        <h3>정보</h3>
-        <ul>
-          <li><a href="#process">도입 과정</a></li>
-          <li><a href="#faq">자주 묻는 질문</a></li>
-          <li><a href="#hq">수발주·온라인몰 개발</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="고객지원">
-        <h3>고객지원</h3>
-        <ul>
-          <li><a href="tel:15442485" data-loc="v2-푸터">1544-2485</a></li>
-          <li><a href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-푸터">카카오 채널</a></li>
-          <li><a href="posmos-apply.html?from=v2-푸터" data-from="v2-푸터" data-offer="unknown" data-target="bottom">무료 상담 신청</a></li>
-          <li><a href="posmos-privacy.html">개인정보처리방침</a></li>
-        </ul>
-      </nav>
+    <p class="ft-big"><a class="ft-tel" href="tel:15442485" data-loc="v2-푸터">1544-2485<i class="stop" aria-hidden="true"></i></a></p>
+    <div class="ft-co">
+      <img src="img/logo.png" alt="포스모스 POSMOS" width="724" height="160" loading="lazy" decoding="async">
+      <p>(주)포스모스 · 대표 박은서</p>
+      <p>사업자등록번호 330-86-02470</p>
+      <p>경기도 의정부시 의정로 16, 4F~5F</p>
+      <p><a href="mailto:info@posmos.net">info@posmos.net</a> · <a href="posmos-privacy.html">개인정보처리방침</a></p>
     </div>
-    <p class="ft-c">© 2026 POSMOS Co., Ltd. All Rights Reserved.</p>
+    <p class="ft-c">© 2026 POSMOS</p>
   </div>
 </footer>
 
@@ -1892,8 +1744,8 @@ try{
       /* 추가 옵션(키오스크 등) 버튼으로 왔고 칩을 아직 고르지 않았으면 그 주제로 안내한다(보내는 값은 그대로) */
       tp=!f.hq&&f.topic&&(!c||c.getAttribute('data-o')=='unknown')?f.topic:'';
     f.fs.hidden=!!f.hq;
-    f.title.innerHTML=f.hq?(f.hq=='hq-supply'?'수발주 프로그램 개발 문의':'온라인몰 개발 문의'):'<span>전화번호와 지역만 남기세요.</span> <span>'+(tp?tp+' 상담을 도와드립니다.':set?'포스기 세트 요금을 안내해 드립니다.':'0원 되는지 알려드립니다.')+'</span>';
-    f.lbl=f.hq?'개발 문의 보내기':tp?tp+' 상담받기':set?'포스기 세트 상담받기':'0원 되는지 확인받기';
+    f.title.innerHTML=f.hq?(f.hq=='hq-supply'?'수발주 프로그램 개발 문의':'온라인몰 개발 문의'):'<span>번호랑 지역만 주세요</span> <span>'+(tp?tp+' 상담 도와드려요.':set?'세트 요금 알려드려요.':'0원 되는지 알려드려요.')+'</span>';
+    f.lbl=f.hq?'개발 문의 보내기':tp?tp+' 상담받기':set?'세트 상담받기':'0원 되는지 확인받기';
     if(!f.busy)f.btn.textContent=f.lbl;
   };
   var clear=function(f){
@@ -1921,8 +1773,8 @@ try{
     if(W.matchMedia('(min-width:900px)').matches)c.style.minHeight=c.offsetHeight+'px';
     c.classList.remove('is-target');
     c.innerHTML='<div class="done" role="status"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path pathLength="1" d="M4 9.5l3.2 3.2L14 5.8"/></svg>'+
-      (mask?'<h3 tabindex="-1">접수됐습니다.</h3><p>담당자가 <span class="nb">영업일 9시~18시</span> 기준 1시간 안에 <b>'+mask+'</b> 번호로 전화드립니다.</p><p>모르는 번호여도 받아 주세요.</p>':'<h3 tabindex="-1"><span>이미 접수됐습니다.</span> <span>담당자가 곧 전화드립니다.</span></h3>')+
-      '<div class="dbtn"><a class="btn-o" href="tel:15442485'+L+'급하시면 지금 전화 1544-2485</a><a class="btn-k" href="'+KAKAO+L+'카카오톡 채널로 묻기</a></div></div>';
+      (mask?'<h3 tabindex="-1">접수됐어요.</h3><p><span class="nb">영업일 9~18시엔</span> 1시간 안에 <b>'+mask+'</b>로 전화드려요.</p><p>모르는 번호여도 받아 주세요.</p>':'<h3 tabindex="-1"><span>이미 접수됐어요.</span> <span>곧 전화드려요.</span></h3>')+
+      '<div class="dbtn"><a class="btn-o" href="tel:15442485'+L+'급하면 전화 1544-2485</a><a class="btn-k" href="'+KAKAO+L+'카톡으로 묻기</a></div></div>';
     if(mask){
       if(c.getBoundingClientRect().top<72)c.scrollIntoView();
       $('h3',c).focus({preventScroll:true});
@@ -1950,7 +1802,7 @@ try{
     var ok=function(){
       done=true;
       showDone(f,(/^01\d/.test(d)?d.slice(0,3)+'-':'')+'····-'+d.slice(-4));
-      showDone(F[f.key=='top'?'bottom':'top']);
+      var other=F[f.key=='top'?'bottom':'top'];if(other)showDone(other);
       /* 좁은 화면에서는 두 카드가 줄어든다: 스크롤 효과의 기준 위치를 다시 재고, 접수한 카드를 화면에 다시 맞춘다 */
       try{if(W.ScrollTrigger)W.ScrollTrigger.refresh()}catch(e){}
       if(!W.matchMedia('(min-width:900px)').matches)f.card.scrollIntoView({block:'start'});
@@ -1971,7 +1823,7 @@ try{
       .then(function(res){return res.ok},function(){return false})
       .then(function(v){v?ok():fail()});
   };
-  ['top','bottom'].forEach(function(key){
+  ['top','bottom'].filter(function(k){return !!$('#fc-'+k)}).forEach(function(key){
     var card=$('#fc-'+key),form=$('form',card),f=F[key]={key:key,card:card,
       phone:$('[type=tel]',card),region:$('[type=text]',card),agree:$('[type=checkbox]',card),
       btn:$('button',card),title:$('.fc-t',card),fs:$('fieldset',card),chips:$$('[type=radio]',card),
@@ -1985,10 +1837,11 @@ try{
     paint(f);
   });
   var prev=null;try{prev=sessionStorage.getItem('pm-done')}catch(e){}
-  if(prev&&!dry){done=true;showDone(F.top);showDone(F.bottom)}
+  if(prev&&!dry){done=true;if(F.top)showDone(F.top);if(F.bottom)showDone(F.bottom)}
 
   var near=function(){
     var m=W.innerHeight/2,dist=function(f){var r=f.card.getBoundingClientRect();return Math.abs((r.top+r.bottom)/2-m)};
+    if(!F.bottom||!F.top)return F.top||F.bottom;
     return dist(F.top)<=dist(F.bottom)?F.top:F.bottom;
   };
   D.addEventListener('click',function(e){
@@ -1997,7 +1850,8 @@ try{
     var loc=a.getAttribute('data-loc'),from=a.getAttribute('data-from');
     if(loc)dl.push({event:'contact_click',method:/^tel:/.test(a.getAttribute('href'))?'tel':'kakao',loc:loc});
     if(!from||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
-    var t=a.getAttribute('data-target'),o=a.getAttribute('data-offer'),f=t=='top'?F.top:t=='bottom'?F.bottom:near(),r;
+    var t=a.getAttribute('data-target'),o=a.getAttribute('data-offer'),f=(t=='top'?F.top:t=='bottom'?F.bottom:near())||F.top||F.bottom,r;
+    if(!f)return;
     e.preventDefault();
     if(!done){
       f.from=from;f.hq=/^hq-/.test(o)?o:'';f.topic=a.getAttribute('data-topic')||'';
@@ -2023,7 +1877,7 @@ try{
     var fo=new IntersectionObserver(function(es){
       es.forEach(function(e){st[e.target.id.slice(3)]=e.isIntersecting});setBar();
     },{threshold:0});
-    fo.observe(F.top.card);fo.observe(F.bottom.card);
+    [F.top,F.bottom].forEach(function(x){if(x)fo.observe(x.card)});
     /* 푸터가 보이는 동안에는 플로팅 버튼을 숨긴다(개인정보처리방침 링크를 가리지 않게) */
     if($('.ft'))new IntersectionObserver(function(es){st.ft=es[es.length-1].isIntersecting;setBar()}).observe($('.ft'));
   }
@@ -2149,7 +2003,6 @@ try{
   from('.choose .lead',{y:40,opacity:0,duration:.9,ease:'expo.out',delay:.15},'.choose .h2',chT);
   from('.choose .card',{y:150,rotation:function(i){return i?5:-5},duration:1.15,ease:'expo.out',stagger:.12},'.choose .cards',W.matchMedia('(max-width:699px)').matches?'top 62%':'top 70%');   /* 좁은 화면: 제목이 먼저 */
   from('.card-a .price strong',{scale:.3,duration:1,ease:'back.out(1.9)'},'.card-a .price','top 86%');
-  from('.exit > *',{y:40,opacity:0,duration:.8,ease:'expo.out',stagger:.08},'.exit','top 90%');
 
   /* ---- 폼 ①·②: 슬랩이 밀려 들어오고 카드가 내려앉는다 ---- */
   from('#fs-top .slab',{xPercent:-102,duration:1.05,ease:'expo.out',clearProps:'transform'},'#fs-top','top 82%');
@@ -2173,17 +2026,14 @@ try{
   gsap.fromTo('#panel',{scale:.84,transformOrigin:'50% 0%'},{scale:1,ease:'none',
     scrollTrigger:{trigger:'#panel',start:'top 100%',end:'top 40%',scrub:.5}});
   from('.pblock .price strong',{scale:.3,duration:1,ease:'back.out(1.8)'},'.pblock','top 84%');
-  from('.pk > picture > img',{x:90,rotation:6,duration:1.1,ease:'expo.out'},'.pk','top 84%');
 
   /* ---- 배달: 3 → 1 ---- */
   if($('#dv')){
     var nw=W.innerWidth<700;   /* 휴대폰: 바깥 아이콘이 카드 가장자리에 잘리지 않을 만큼만 벌린다 */
     var dt=gsap.timeline({defaults:{ease:'power2.out'},scrollTrigger:{trigger:'#dv',start:'top 88%',end:'top 22%',scrub:.6}});
     dt.fromTo('.logos i',{xPercent:function(i){return(i-1)*(nw?28:70)},y:nw?-20:-50,rotation:function(i){return(i-1)*(nw?10:18)},scale:.7},{xPercent:0,y:0,rotation:0,scale:1,duration:1},0)
-      .fromTo('.to1',{scale:.4},{scale:1,duration:.7},.2)
       .fromTo('.pos',{y:110,scale:.86},{y:0,scale:1,duration:1},0);
   }
-  from('.dchips span',{y:24,scale:.7,opacity:0,duration:.7,ease:'back.out(1.7)',stagger:.08},'.dchips','top 92%');
 
   /* ---- 큰 글자 띠: 스크롤에 따라 서로 반대로 흐른다 ---- */
   /* 이동 거리는 화면 폭의 배수다. 넓은 화면에서는 같은 배수가 너무 빨라 읽기 어려우므로 줄인다 */
