@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="gfx-scale" content="1">
+<meta name="gfx-quality" content="82">
+<!-- 히어로 사진 합성 모바일용(720x405). 실표시 폭 약 335px(배율 0.465)라 라벨을 상대적으로 크게(글자 26px = 실표시 약 12px).
+     태블릿 포스(1) / 토스프론트(2). 사진은 보정하지 않는다.
+     alt: "카운터 위에 나란히 놓인 태블릿 포스(1)와 토스프론트 카드 단말기(2)" -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+#cv{width:720px;height:405px;background:#fff}
+#cv img{position:absolute;left:0;top:0;width:720px;height:405px;display:block}
+.pill{position:absolute;display:flex;align-items:center;gap:9px;height:46px;padding:0 18px 0 6px;border-radius:23px;background:#fff;
+  box-shadow:0 2px 8px rgba(11,13,18,.25);transform:translateX(-50%);white-space:nowrap}
+.pill .n{width:34px;height:34px;border-radius:50%;background:var(--orange);color:var(--ink);display:grid;place-items:center;font-size:23px;font-weight:900;line-height:1;letter-spacing:0}
+.pill .t{font-size:27px;font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--ink)}
+#p1{left:208px;top:326px}
+#p2{left:497px;top:326px}
+</style>
+<div id="cv">
+  <img src="../img/hero-offer-720.jpg" alt="">
+  <div class="pill" id="p1"><span class="n">1</span><span class="t">태블릿 포스</span></div>
+  <div class="pill" id="p2"><span class="n">2</span><span class="t">토스프론트</span></div>
+</div>

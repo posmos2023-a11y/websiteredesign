@@ -1,0 +1,16 @@
+/* 이미지 시안 공통 스타일. 모든 graphics/*.html 이 이 파일을 불러온다. 사이트(index.html)와 같은 색·글꼴·모서리 */
+:root{
+  --ink:#0B0D12;--ink-2:#4A5060;--ink-3:#69707F;--line:#E4E7EC;--soft:#F2F4F7;
+  --blue:#2E48FF;--blue-d:#1F36E0;--blue-l:#E8ECFF;--orange:#FF681C;--orange-l:#FFE9DC;--kakao:#FEE500;--white:#fff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#d8dbe2}                      /* 작업 화면 배경(이미지에는 안 나온다: #cv 만 캡처) */
+body{font-family:"Pretendard Variable","Pretendard",-apple-system,"Malgun Gothic",sans-serif;color:var(--ink);line-height:1.3;
+  -webkit-font-smoothing:antialiased;word-break:keep-all;letter-spacing:-.02em;padding:24px}
+#cv{position:relative;overflow:hidden}              /* 이 상자가 이미지다. width 는 반드시 px 로 지정(예: 300px), 높이는 내용에 맞게 */
+#cv.bg-white{background:#fff}#cv.bg-soft{background:var(--soft)}#cv.bg-blue{background:var(--blue);color:#fff}#cv.bg-ink{background:var(--ink);color:#fff}#cv.bg-orange{background:var(--orange)}
+svg{display:block}
+/* 글자 위계(이미지 안): 숫자·핵심 900, 라벨 800/700. 휴대폰 실크기 기준이므로 라벨은 12px 이상, 핵심 라벨은 14~16px */
+.t-big{font-weight:900;letter-spacing:-.05em;line-height:1}
+.t-h{font-weight:800;letter-spacing:-.035em}
+.t-s{font-weight:700;font-size:13px;letter-spacing:-.02em}

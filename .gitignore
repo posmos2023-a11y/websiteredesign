@@ -36,3 +36,6 @@ desktop.ini
 
 # 운영 도메인 연결 파일: websiteredesign 저장소에는 올리지 않는다 (posmos.net 과 충돌 방지)
 CNAME
+
+# 이미지 시안 작업용 미리보기
+graphics/_preview/

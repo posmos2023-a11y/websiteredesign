@@ -1,0 +1,67 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="gfx-scale" content="4">
+<!-- 기준 시안(다른 이미지의 스타일 본보기). 0원 카드(쓰던 기기 + 토스프론트 = 포스, 없는 비용 3가지).
+     대체하는 글: 카드 ①의 '이런 사장님께' 목록 3줄, '받는 것', 안내 두 줄.
+     alt: "쓰던 태블릿·휴대폰과 토스프론트를 합치면 포스가 됩니다. 월 이용료, 보증금, 가입비가 없습니다." -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+#cv{width:300px;height:263px;display:flex;flex-direction:column;justify-content:space-between}
+.eq{display:flex;align-items:flex-start;justify-content:space-between}
+.it{width:80px;text-align:center}
+.tile{width:80px;height:80px;border-radius:24px;display:grid;place-items:center;background:var(--soft)}
+.tile.blue{background:var(--blue)}
+.lb{margin-top:9px;font-size:13.5px;font-weight:800;letter-spacing:-.03em;line-height:1.25;color:var(--ink)}
+.lb.b{color:var(--blue)}
+.op{width:22px;height:80px;display:grid;place-items:center;font-size:26px;font-weight:900;color:var(--ink-3);line-height:1}
+.none{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:0}
+.net{border-radius:16px;background:var(--orange-l);padding:12px 8px;text-align:center;font-size:14.5px;font-weight:800;letter-spacing:-.035em;color:var(--ink-2)}
+.net em{font-style:normal;font-weight:900;color:var(--orange);margin-left:4px}
+.chip{border-radius:16px;background:var(--orange-l);padding:11px 4px 10px;text-align:center}
+.chip b{display:block;font-size:13px;font-weight:700;color:var(--ink-2);letter-spacing:-.02em}
+.chip i{display:block;margin-top:2px;font-style:normal;font-size:19px;font-weight:900;color:var(--orange);letter-spacing:-.04em}
+</style>
+<div id="cv" class="bg-white">
+  <div class="eq">
+    <div class="it">
+      <div class="tile">
+        <svg width="62" height="56" viewBox="0 0 62 56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="40" height="30" rx="5" fill="#fff" stroke="#0B0D12" stroke-width="3"/>
+          <path d="M9 14h14M9 21h20M9 28h10" stroke="#C9CEDA" stroke-width="3"/>
+          <rect x="34" y="20" width="22" height="34" rx="5" fill="#fff" stroke="#2E48FF" stroke-width="3"/>
+          <path d="M42 48h6" stroke="#2E48FF" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="lb">쓰던 태블릿<br>·휴대폰</div>
+    </div>
+    <div class="op">+</div>
+    <div class="it">
+      <div class="tile">
+        <svg width="50" height="60" viewBox="0 0 50 60" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="2" width="32" height="40" rx="7" fill="#fff" stroke="#0B0D12" stroke-width="3"/>
+          <circle cx="25" cy="19" r="8" fill="#FF681C"/>
+          <path d="M21.5 19l2.6 2.6 4.6-5" stroke="#fff" stroke-width="2.6"/>
+          <path d="M20 42v7M30 42v7M12 54h26" stroke="#0B0D12" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="lb">토스프론트</div>
+    </div>
+    <div class="op">=</div>
+    <div class="it">
+      <div class="tile blue">
+        <svg width="46" height="46" viewBox="0 0 46 46" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="23" cy="23" r="21" stroke="#fff" stroke-width="3" opacity=".35"/>
+          <path d="M13 24l7.5 7.5L34 16" stroke="#fff" stroke-width="5"/>
+        </svg>
+      </div>
+      <div class="lb b">포스 완성</div>
+    </div>
+  </div>
+  <div class="none">
+    <div class="chip"><b>월 이용료</b><i>없음</i></div>
+    <div class="chip"><b>보증금</b><i>없음</i></div>
+    <div class="chip"><b>가입비</b><i>없음</i></div>
+  </div>
+  <div class="net">인터넷 새로 가입<em>안 해도 됨</em></div>
+</div>

@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<!-- 0원 상세 3단계(넓은 화면용). 모바일용은 zero-flow.html. 설계 폭 760px, 배율 2. 배경 연회색, 모서리 32px(이미지 안에 구워져 있다).
+     alt: "1 쓰던 태블릿·휴대폰 준비(새로 사지 않아도 됩니다), 2 토스프론트 연결(담당자가 안내), 3 결제 받기(카드, 애플페이·카카오페이·토스페이)" -->
+<meta name="gfx-scale" content="2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+html,body{background:#fff}
+#cv{width:760px;padding:30px 36px 30px;border-radius:32px}
+.flow{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr;align-items:start}
+.st{display:flex;flex-direction:column;align-items:center;text-align:center}
+.num{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:19px;font-weight:900;line-height:1;letter-spacing:0}
+.tile{margin-top:14px;width:100%;height:150px;border-radius:28px;background:#fff;display:grid;place-items:center}
+.tt{margin-top:16px;font-size:21px;font-weight:900;letter-spacing:-.045em;line-height:1.25;color:var(--ink)}
+.ss{margin-top:8px;white-space:nowrap;font-size:15px;font-weight:700;letter-spacing:-.03em;line-height:1.35;color:var(--ink-2)}
+.ar{margin-top:14px;height:150px;display:grid;place-items:center}
+.pay{display:flex;justify-content:center;gap:12px;margin-top:26px}
+.pill{height:42px;padding:0 20px;border-radius:21px;background:#fff;display:grid;place-items:center;font-size:16px;font-weight:800;letter-spacing:-.04em;color:var(--ink);white-space:nowrap}
+</style>
+<div id="cv" class="bg-soft">
+  <div class="flow">
+    <div class="st"><div class="num">1</div>
+      <div class="tile"><svg width="86" height="78" viewBox="0 0 62 56" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="40" height="30" rx="5" fill="#fff" stroke="#0B0D12" stroke-width="3"/><path d="M9 14h14M9 21h20M9 28h10" stroke="#C9CEDA" stroke-width="3"/><rect x="34" y="20" width="22" height="34" rx="5" fill="#fff" stroke="#2E48FF" stroke-width="3"/><path d="M42 48h6" stroke="#2E48FF" stroke-width="3"/></svg></div>
+      <div class="tt">쓰던 기기 준비</div><div class="ss">새로 안 사도 돼요</div></div>
+    <div class="ar"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#69707F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11M8.5 3l5 5-5 5"/></svg></div>
+    <div class="st"><div class="num">2</div>
+      <div class="tile"><svg width="70" height="84" viewBox="0 0 50 60" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="32" height="40" rx="7" fill="#fff" stroke="#0B0D12" stroke-width="3"/><circle cx="25" cy="19" r="8" fill="#FF681C"/><path d="M21.5 19l2.6 2.6 4.6-5" stroke="#fff" stroke-width="2.6"/><path d="M20 42v7M30 42v7M12 54h26" stroke="#0B0D12" stroke-width="3"/></svg></div>
+      <div class="tt">토스프론트 연결</div><div class="ss">담당자가 안내</div></div>
+    <div class="ar"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="#69707F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11M8.5 3l5 5-5 5"/></svg></div>
+    <div class="st"><div class="num">3</div>
+      <div class="tile"><svg width="92" height="80" viewBox="0 0 66 58" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="54" height="38" rx="7" fill="#fff" stroke="#0B0D12" stroke-width="3"/><path d="M2 16h54" stroke="#0B0D12" stroke-width="3"/><path d="M10 33h12" stroke="#C9CEDA" stroke-width="3"/><circle cx="51" cy="40" r="12" fill="#2E48FF" stroke="#fff" stroke-width="3"/><path d="M45.5 40.5l4 4 7-8" stroke="#fff" stroke-width="3"/></svg></div>
+      <div class="tt">결제 받기</div><div class="ss">카드·간편결제</div></div>
+  </div>
+  <div class="pay"><div class="pill">카드</div><div class="pill">애플페이</div><div class="pill">카카오페이</div><div class="pill">토스페이</div></div>
+</div>

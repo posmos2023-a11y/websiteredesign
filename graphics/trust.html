@@ -1,0 +1,80 @@
+<!doctype html>
+<meta charset="utf-8">
+<!-- 신뢰 목록 이미지('포스모스에 맡기면'). 1만 가맹점 / 토스플레이스 공식 파트너 / 서류 대행 / 고장 시 원격·방문.
+     alt: "1만 가맹점의 선택. 토스플레이스 공식 파트너. 서류는 포스모스가 카드사 가맹 서류를 대행합니다. 고장 나면 원격으로 해결하고 필요하면 방문합니다." -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+#cv{width:335px;padding:0 0 4px}
+.row{display:flex;align-items:center;gap:12px;padding:16px 14px;border-top:2px solid var(--ink)}
+.row.hero{border-top:0;background:var(--blue);border-radius:24px;margin:0;padding:14px 14px}
+.row.hero + .row{margin-top:14px}
+.lead{width:76px;flex:none;display:grid;place-items:center}
+.num{font-size:58px;font-weight:900;letter-spacing:-.06em;line-height:1;color:var(--blue);white-space:nowrap}
+.tile{width:72px;height:72px;border-radius:22px;display:grid;place-items:center;background:var(--soft)}
+.tx{flex:1;min-width:0}
+.ti{font-size:22px;font-weight:900;letter-spacing:-.03em;line-height:1.2;color:var(--ink)}
+.su{margin-top:5px;font-size:15px;font-weight:700;letter-spacing:-.03em;line-height:1.3;color:var(--ink-2)}
+.hero .ti{color:#fff}
+.badge{display:inline-block;margin-top:7px;padding:5px 12px 6px;border-radius:999px;background:#fff;color:var(--blue);font-size:15px;font-weight:900;letter-spacing:-.03em;line-height:1.2}
+</style>
+<div id="cv" class="bg-white">
+  <!-- 1 -->
+  <div class="row">
+    <div class="lead"><div class="num">1만</div></div>
+    <div class="tx"><div class="ti">가맹점의 선택</div></div>
+  </div>
+
+  <!-- 2 : 토스플레이스 공식 파트너 (강조) -->
+  <div class="row hero">
+    <div class="lead">
+      <div class="tile">
+        <svg width="44" height="50" viewBox="0 0 44 50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 3L40 9.5V24C40 35 32.5 42.5 22 47C11.5 42.5 4 35 4 24V9.5Z" fill="#fff" stroke="#0B0D12" stroke-width="3"/>
+          <path d="M13.5 24.5l6.3 6.3L31 18.5" stroke="#2E48FF" stroke-width="4.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="tx">
+      <div class="ti">토스플레이스</div>
+      <div class="badge">공식 파트너</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="row">
+    <div class="lead">
+      <div class="tile">
+        <svg width="46" height="52" viewBox="0 0 46 52" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3H28L40 15V44a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Z" fill="#fff" stroke="#0B0D12" stroke-width="3"/>
+          <path d="M28 3V15H40" stroke="#0B0D12" stroke-width="3"/>
+          <path d="M12 24h14M12 31h10" stroke="#C9CEDA" stroke-width="3"/>
+          <circle cx="32" cy="38" r="9" fill="#FF681C"/>
+          <path d="M28 38l3 3 5.5-6" stroke="#fff" stroke-width="3"/>
+        </svg>
+      </div>
+    </div>
+    <div class="tx">
+      <div class="ti">서류는 포스모스가</div>
+      <div class="su">카드사 가맹 서류 대행</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="row">
+    <div class="lead">
+      <div class="tile">
+        <svg width="56" height="56" viewBox="-25 -25 50 50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g transform="rotate(45) translate(0,-2)">
+            <path d="M-4.5 -19.04V-9H4.5V-19.04A11 11 0 0 1 4 1.25V22A4 4 0 0 1 -4 22V1.25A11 11 0 0 1 -4.5 -19.04Z" fill="#fff" stroke="#0B0D12" stroke-width="3"/>
+            <circle cx="0" cy="16" r="2.4" fill="#2E48FF"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="tx">
+      <div class="ti">고장 나면</div>
+      <div class="su">원격 해결, 필요하면 방문</div>
+    </div>
+  </div>
+</div>
