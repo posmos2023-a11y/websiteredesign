@@ -84,6 +84,8 @@ body{
   -webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;word-break:keep-all;overflow-wrap:break-word;
 }
 img{display:block;max-width:100%;height:auto}
+picture{display:contents}   /* WebP 를 고르는 껍데기일 뿐: 안의 img 가 원래 자리의 상자로 배치된다 */
+source{display:none}        /* 그리드 안(.pk)에서 빈 칸을 차지하지 않게 */
 a{color:inherit;text-decoration:none}
 button,input{font:inherit;color:inherit}
 ul,ol{list-style:none}
@@ -580,7 +582,7 @@ body:has(.done) .ft{padding-bottom:56px}
 .pblock .fine{margin-top:12px;color:#fff;font-size:17px}
 .pblock .fine+.fine{margin-top:2px;color:#C4C9D6}
 .pk{order:3}
-.pk>img{width:100%;border-radius:20px}
+.pk>picture>img{width:100%;border-radius:20px}
 .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;font-size:14.5px;font-weight:700;text-align:center;color:#C4C9D6}
 .tri img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;margin-bottom:8px;background:#fff}
 .pb .sub-h{margin-top:0;padding-top:0;border:0;font-size:clamp(20px,2.2vw,26px);color:#fff;letter-spacing:-.03em}
@@ -591,7 +593,7 @@ body:has(.done) .ft{padding-bottom:56px}
 .panel .cta .fine{color:#C4C9D6}
 @media (min-width:700px){
   .panel{margin:0;border-radius:36px;padding:52px 40px 44px}
-  .pk>img{border-radius:28px}
+  .pk>picture>img{border-radius:28px}
   .tri{gap:12px;margin-top:12px}
   .tri img{border-radius:20px}
   .pb{grid-column:1 / -1}
@@ -620,7 +622,7 @@ body:has(.done) .ft{padding-bottom:56px}
 .deliv .items+.fine{margin-top:30px;color:var(--ink-3)}
 .dv{margin-top:48px;background:var(--soft);border-radius:28px;padding:28px 20px 20px;overflow:hidden}
 .logos{display:flex;justify-content:center;gap:12px}
-.logos i{width:30%;max-width:132px;aspect-ratio:1;border-radius:24%;background:#fff url(img/delivery-logos.jpg) 0 50%/319% auto no-repeat;box-shadow:0 18px 30px -18px rgba(11,13,18,.45)}
+.logos i{width:30%;max-width:132px;aspect-ratio:1;border-radius:24%;background:#fff url(img/delivery-logos.jpg) 0 50%/319% auto no-repeat;background-image:image-set("img/delivery-logos-510.webp" type("image/webp"),"img/delivery-logos.jpg" type("image/jpeg"));box-shadow:0 18px 30px -18px rgba(11,13,18,.45)}
 .logos i:nth-child(2){background-position:50% 50%}
 .logos i:nth-child(3){background-position:100% 50%}
 .to1{margin:14px 0 16px;text-align:center;font-size:clamp(60px,8vw,112px);font-weight:900;letter-spacing:-.05em;line-height:1}
@@ -646,7 +648,7 @@ body:has(.done) .ft{padding-bottom:56px}
 .kin .o{color:#fff;-webkit-text-stroke:0;paint-order:normal;text-shadow:-.02em 0 0 var(--ink),.02em 0 0 var(--ink),0 -.02em 0 var(--ink),0 .02em 0 var(--ink),-.014em -.014em 0 var(--ink),.014em -.014em 0 var(--ink),-.014em .014em 0 var(--ink),.014em .014em 0 var(--ink)}
 .kin .band .o{color:#fff;-webkit-text-stroke:0;text-shadow:none}
 .kin .sep{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:currentColor;margin:0 .22em;vertical-align:.18em}
-.kin .r1 .sep,.kin .r3 .sep{background:var(--blue)}
+.kin .r1 .sep{background:var(--blue)}
 @media (min-width:700px){ .kin{padding:24px 0 112px} }
 
 /* ---------- 주문 옵션 (벤토) ---------- */
@@ -1215,17 +1217,20 @@ if(META_PIXEL_ID){
           </a>
           <div class="cta-2">
             <a class="btn-o" href="tel:15442485" data-loc="v2-히어로">전화 1544-2485</a>
-            <a class="btn-o" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-히어로">카카오톡 상담</a>
+            <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-히어로">카카오톡 상담</a>
           </div>
         </div>
-        <p class="note">전화번호·지역만 남기면 영업일 기준 1시간 안에 전화드립니다.</p>
+        <p class="note">전화번호·지역만 남기면 영업일 9시~18시 기준, 1시간 안에 전화드립니다.</p>
         <p class="more">포스기 본체까지 필요하세요? <a href="#allinone">포스기 세트 보기</a></p>
       </div>
       <div class="stage" id="stage">
         <div class="slab"></div>
         <div class="pw">
         <div class="photo">
-          <img id="heroImg" src="img/hero-offer-1200.jpg" srcset="img/hero-offer-720.jpg 720w, img/hero-offer-1200.jpg 1200w" sizes="(min-width:700px) 50vw, 100vw" width="1200" height="675" alt="카운터 위에 나란히 놓인 태블릿 포스 화면과 토스프론트 카드 단말기" fetchpriority="high" decoding="async">
+          <picture>
+            <source type="image/webp" srcset="img/hero-offer-720.webp 720w, img/hero-offer-1200.webp 1200w" sizes="(min-width:1400px) 440px, (min-width:900px) 36vw, 100vw">
+            <img id="heroImg" src="img/hero-offer-1200.jpg" srcset="img/hero-offer-720.jpg 720w, img/hero-offer-1200.jpg 1200w" sizes="(min-width:1400px) 440px, (min-width:900px) 36vw, 100vw" width="1200" height="675" alt="카운터 위에 나란히 놓인 태블릿 포스 화면과 토스프론트 카드 단말기" fetchpriority="high" decoding="async">
+          </picture>
         </div>
         <p class="legend"><span>태블릿 — 포스 화면</span><span>토스프론트 — 토스 카드 단말기</span></p>
         </div>
@@ -1529,11 +1534,16 @@ if(META_PIXEL_ID){
     <div class="zg">
       <div class="zm">
         <div class="shot">
-          <img src="img/hero-3.jpg" width="2000" height="1126" alt="카운터에 놓인 토스프론트와 뒤에서 태블릿 포스를 쓰는 직원" loading="lazy" decoding="async">
+          <!-- WebP 는 1400px 까지다: 그보다 큰 사진이 필요한 700~1199px(세로 태블릿·태블릿 가로)은 원본 JPG 를 쓴다 -->
+          <picture>
+            <source type="image/webp" media="(max-width:699px), (min-width:1200px)" srcset="img/hero-3-720.webp 720w, img/hero-3-1400.webp 1400w" sizes="(min-width:1400px) 660px, (min-width:1200px) 47vw, 100vw">
+            <img src="img/hero-3.jpg" width="2000" height="1126" alt="카운터에 놓인 토스프론트와 뒤에서 태블릿 포스를 쓰는 직원" loading="lazy" decoding="async">
+          </picture>
         </div>
+        <!-- 두 화면 타일의 WebP 는 640px 하나뿐이라 휴대폰에서만 쓴다 -->
         <div class="duo">
-          <div><img src="img/front-3.jpg" width="1400" height="1006" alt="토스프론트 주문 시작 화면 (먹고가요, 포장해요)" loading="lazy" decoding="async"></div>
-          <div><img src="img/front-4.jpg" width="1400" height="987" alt="토스프론트 메뉴 선택 화면" loading="lazy" decoding="async"></div>
+          <div><picture><source type="image/webp" media="(max-width:699px)" srcset="img/front-3-640.webp"><img src="img/front-3.jpg" width="1400" height="1006" alt="토스프론트 주문 시작 화면 (먹고가요, 포장해요)" loading="lazy" decoding="async"></picture></div>
+          <div><picture><source type="image/webp" media="(max-width:699px)" srcset="img/front-4-640.webp"><img src="img/front-4.jpg" width="1400" height="987" alt="토스프론트 메뉴 선택 화면" loading="lazy" decoding="async"></picture></div>
         </div>
         <p class="cap">토스프론트는 키오스크로도 쓸 수 있습니다.</p>
       </div>
@@ -1575,11 +1585,14 @@ if(META_PIXEL_ID){
         </div>
       </div>
       <div class="pk">
-        <img src="img/package.jpg" width="1080" height="1044" alt="인터넷부터 포스기까지 한 번에 받는 포스기 패키지 안내 이미지" loading="lazy" decoding="async">
+        <picture>
+          <source type="image/webp" srcset="img/package-640.webp 640w, img/package-1080.webp 1080w" sizes="(min-width:1400px) 390px, (min-width:900px) 32vw, (min-width:700px) 70vw, 100vw">
+          <img src="img/package.jpg" width="1080" height="1044" alt="인터넷부터 포스기까지 한 번에 받는 포스기 패키지 안내 이미지" loading="lazy" decoding="async">
+        </picture>
         <ul class="tri">
-          <li><img src="img/bundle-internet.jpg" width="360" height="360" alt="" loading="lazy" decoding="async">인터넷 500M</li>
-          <li><img src="img/bundle-cctv.jpg" width="800" height="800" alt="" loading="lazy" decoding="async">CCTV</li>
-          <li><img src="img/bundle-phone.jpg" width="632" height="677" alt="" loading="lazy" decoding="async">AI전화</li>
+          <li><picture><source type="image/webp" srcset="img/bundle-internet-240.webp"><img src="img/bundle-internet.jpg" width="360" height="360" alt="" loading="lazy" decoding="async"></picture>인터넷 500M</li>
+          <li><picture><source type="image/webp" srcset="img/bundle-cctv-240.webp"><img src="img/bundle-cctv.jpg" width="800" height="800" alt="" loading="lazy" decoding="async"></picture>CCTV</li>
+          <li><picture><source type="image/webp" srcset="img/bundle-phone-240.webp"><img src="img/bundle-phone.jpg" width="632" height="677" alt="" loading="lazy" decoding="async"></picture>AI전화</li>
         </ul>
       </div>
       <div class="pb">
@@ -1625,7 +1638,7 @@ if(META_PIXEL_ID){
     <div class="dv" id="dv">
       <div class="logos" role="img" aria-label="배달의민족, 요기요, 쿠팡이츠 로고"><i></i><i></i><i></i></div>
       <p class="to1" aria-hidden="true">3 <span>→</span> 1</p>
-      <div class="pos"><img src="img/delivery-pos.jpg" width="1400" height="1018" alt="포스 화면에서 배달의민족 주문을 확인하고 주문서를 출력하는 모습" loading="lazy" decoding="async"></div>
+      <div class="pos"><picture><source type="image/webp" srcset="img/delivery-pos-640.webp 640w, img/delivery-pos-1100.webp 1100w" sizes="(min-width:1400px) 520px, (min-width:900px) 38vw, 100vw"><img src="img/delivery-pos.jpg" width="1400" height="1018" alt="포스 화면에서 배달의민족 주문을 확인하고 주문서를 출력하는 모습" loading="lazy" decoding="async"></picture></div>
     </div>
   </div>
 </section>
@@ -1634,7 +1647,6 @@ if(META_PIXEL_ID){
 <div class="kin" id="kin" aria-hidden="true">
   <div class="row r1"><span><span class="o">설치비</span> 0원<i class="sep"></i><span class="o">관리비</span> 0원<i class="sep"></i><span class="o">기기값</span> 0원<i class="sep"></i></span></div>
   <div class="band"><div class="row r2"><span>0원<i class="sep"></i><span class="o">0원</span><i class="sep"></i>0원<i class="sep"></i><span class="o">0원</span><i class="sep"></i>0원<i class="sep"></i><span class="o">0원</span><i class="sep"></i></span></div></div>
-  <div class="row r3"><span>기기값 <span class="o">0원</span><i class="sep"></i>설치비 <span class="o">0원</span><i class="sep"></i>관리비 <span class="o">0원</span><i class="sep"></i></span></div>
 </div>
 
 <!-- ================= 주문 옵션 ================= -->
@@ -1657,7 +1669,7 @@ if(META_PIXEL_ID){
           </ul>
           <a class="btn dk" href="posmos-apply.html?from=v2-옵션-QR오더" data-from="v2-옵션-QR오더" data-offer="unknown" data-target="near" data-topic="QR오더">QR오더 상담받기</a>
         </div>
-        <div class="ph"><img src="img/qr-1.jpg" width="1400" height="934" alt="카페 테이블 위에 놓인 QR 주문 스티커" loading="lazy" decoding="async"></div>
+        <div class="ph"><picture><source type="image/webp" srcset="img/qr-1-640.webp 640w, img/qr-1-1200.webp 1200w" sizes="(min-width:1400px) 600px, (min-width:700px) 46vw, 100vw"><img src="img/qr-1.jpg" width="1400" height="934" alt="카페 테이블 위에 놓인 QR 주문 스티커" loading="lazy" decoding="async"></picture></div>
       </article>
       <article class="tile t-tb">
         <div class="tx">
@@ -1672,7 +1684,7 @@ if(META_PIXEL_ID){
           </ul>
           <a class="btn" href="posmos-apply.html?from=v2-옵션-테이블오더" data-from="v2-옵션-테이블오더" data-offer="unknown" data-target="near" data-topic="테이블오더">테이블오더 상담받기</a>
         </div>
-        <div class="ph"><img src="img/table-3.jpg" width="696" height="332" alt="테이블에 설치된 주문용 태블릿" loading="lazy" decoding="async"></div>
+        <div class="ph"><picture><source type="image/webp" srcset="img/table-3-696.webp"><img src="img/table-3.jpg" width="696" height="332" alt="테이블에 설치된 주문용 태블릿" loading="lazy" decoding="async"></picture></div>
       </article>
       <article class="tile t-ki">
         <div class="tx">
@@ -1714,7 +1726,7 @@ if(META_PIXEL_ID){
         </div>
       </div>
       <figure class="ps">
-        <span class="ps-f"><img src="img/process-status.jpg" width="680" height="684" alt="설치 진행 상황을 단계별로 보여주는 화면" loading="lazy" decoding="async"></span>
+        <span class="ps-f"><picture><source type="image/webp" srcset="img/process-status-680.webp"><img src="img/process-status.jpg" width="680" height="684" alt="설치 진행 상황을 단계별로 보여주는 화면" loading="lazy" decoding="async"></picture></span>
         <figcaption>진행 상황 확인 화면</figcaption>
       </figure>
     </div>
@@ -1754,59 +1766,8 @@ if(META_PIXEL_ID){
         <p>여기 없는 질문은 전화나 카카오톡으로 물어보세요.</p>
         <div class="btn2">
           <a class="btn-o" href="tel:15442485" data-loc="v2-FAQ">전화 1544-2485</a>
-          <a class="btn-o" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-FAQ">카카오톡 상담</a>
+          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-FAQ">카카오톡 상담</a>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 폼 ② ================= -->
-<section class="sec close" id="apply2">
-  <div class="wrap close-grid">
-    <div class="end">
-      <h2 class="h2 rv-h" id="h2c"><span class="ln"><span class="in">전화번호와 지역만 남기세요.</span></span> <span class="ln"><span class="in">나머지는 포스모스가 확인해 <span style="white-space:nowrap">드립니다<i class="stop" id="stop2" aria-hidden="true"></i></span></span></span></h2>
-      <p class="lead">0원으로 되는지, 어느 쪽이 맞는지 담당자가 확인해 드립니다.</p>
-    </div>
-    <div class="formstage fs-r" id="fs-bottom">
-      <div class="slab"></div>
-      <div class="fc" id="fc-bottom">
-        <h3 class="fc-t"><span>전화번호와 지역만 남기세요.</span> <span>0원 되는지 알려드립니다.</span></h3>
-        <form id="form-bottom" action="https://formspree.io/f/xgobbwjd" method="POST">
-          <input type="hidden" name="신청 버튼" value="v2-하단폼-직접입력(스크립트 없음)">
-          <fieldset class="chips">
-            <legend>관심 있는 쪽 (선택)</legend>
-            <input type="radio" form="chip-only" name="관심-bottom" id="chip-zero-bottom" value="쓰던 기기로 0원" data-o="zero"><label for="chip-zero-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>쓰던 기기로 0원</label>
-            <input type="radio" form="chip-only" name="관심-bottom" id="chip-set-bottom" value="포스기 세트" data-o="set"><label for="chip-set-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>포스기 세트</label>
-            <input type="radio" form="chip-only" name="관심-bottom" id="chip-unknown-bottom" value="잘 모르겠어요" data-o="unknown" checked><label for="chip-unknown-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>잘 모르겠어요</label>
-          </fieldset>
-          <div class="fld">
-            <label for="phone-bottom">전화번호</label>
-            <input id="phone-bottom" name="전화번호" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="010-0000-0000" required aria-describedby="e-phone-bottom">
-            <p class="err" id="e-phone-bottom" aria-live="polite"></p>
-          </div>
-          <div class="fld">
-            <label for="region-bottom">매장 지역</label>
-            <p class="hint" id="h-region-bottom">시·구까지만 적어 주세요.</p>
-            <input id="region-bottom" name="지역" type="text" autocomplete="address-level2" placeholder="예) 의정부, 서울 강남" required aria-describedby="h-region-bottom e-region-bottom">
-            <p class="err" id="e-region-bottom" aria-live="polite"></p>
-          </div>
-          <label class="agree" for="agree-bottom"><input type="checkbox" id="agree-bottom" required aria-describedby="e-agree-bottom"><span>(필수) <a href="posmos-privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>에 동의하며, 상담 목적으로 연락받는 것에 동의합니다.</span></label>
-          <p class="err" id="e-agree-bottom" aria-live="polite"></p>
-          <p class="err" id="e-send-bottom" aria-live="polite"></p>
-          <button class="btn xl" type="submit">0원 되는지 확인받기</button>
-        </form>
-        <ul class="prom">
-          <li>영업일 9시~18시 기준, 1시간 안에 담당자가 전화드립니다.</li>
-          <li>상담만 받고 안 하셔도 됩니다.</li>
-          <li>남기신 번호는 상담 연락과 서비스 안내에만 씁니다.</li>
-        </ul>
-        <p class="or">전화나 카카오톡이 편하시면</p>
-        <div class="btn2">
-          <a class="btn-o" href="tel:15442485" data-loc="v2-하단폼">전화 1544-2485</a>
-          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-하단폼">카카오톡 상담</a>
-        </div>
-        <p class="co"><span class="nb">(주)포스모스</span><span class="sep"> · </span><span class="nb">대표 박은서</span><span class="sep s2"> · </span><span class="nb">사업자등록번호 330-86-02470</span><span class="sep s3"> · </span><span class="nb">경기도 의정부시 의정로 16, 4F~5F</span></p>
       </div>
     </div>
   </div>
@@ -1867,6 +1828,58 @@ if(META_PIXEL_ID){
     </div>
   </div>
 </section>
+
+<!-- ================= 폼 ② ================= -->
+<section class="sec close" id="apply2">
+  <div class="wrap close-grid">
+    <div class="end">
+      <h2 class="h2 rv-h" id="h2c"><span class="ln"><span class="in">전화번호와 지역만 남기세요.</span></span> <span class="ln"><span class="in">나머지는 포스모스가 확인해 <span style="white-space:nowrap">드립니다<i class="stop" id="stop2" aria-hidden="true"></i></span></span></span></h2>
+      <p class="lead">0원으로 되는지, 어느 쪽이 맞는지 담당자가 확인해 드립니다.</p>
+    </div>
+    <div class="formstage fs-r" id="fs-bottom">
+      <div class="slab"></div>
+      <div class="fc" id="fc-bottom">
+        <h3 class="fc-t"><span>전화번호와 지역만 남기세요.</span> <span>0원 되는지 알려드립니다.</span></h3>
+        <form id="form-bottom" action="https://formspree.io/f/xgobbwjd" method="POST">
+          <input type="hidden" name="신청 버튼" value="v2-하단폼-직접입력(스크립트 없음)">
+          <fieldset class="chips">
+            <legend>관심 있는 쪽 (선택)</legend>
+            <input type="radio" form="chip-only" name="관심-bottom" id="chip-zero-bottom" value="쓰던 기기로 0원" data-o="zero"><label for="chip-zero-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>쓰던 기기로 0원</label>
+            <input type="radio" form="chip-only" name="관심-bottom" id="chip-set-bottom" value="포스기 세트" data-o="set"><label for="chip-set-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>포스기 세트</label>
+            <input type="radio" form="chip-only" name="관심-bottom" id="chip-unknown-bottom" value="잘 모르겠어요" data-o="unknown" checked><label for="chip-unknown-bottom"><svg class="ck" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3.2L14 5.8"/></svg>잘 모르겠어요</label>
+          </fieldset>
+          <div class="fld">
+            <label for="phone-bottom">전화번호</label>
+            <input id="phone-bottom" name="전화번호" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="010-0000-0000" required aria-describedby="e-phone-bottom">
+            <p class="err" id="e-phone-bottom" aria-live="polite"></p>
+          </div>
+          <div class="fld">
+            <label for="region-bottom">매장 지역</label>
+            <p class="hint" id="h-region-bottom">시·구까지만 적어 주세요.</p>
+            <input id="region-bottom" name="지역" type="text" autocomplete="address-level2" placeholder="예) 의정부, 서울 강남" required aria-describedby="h-region-bottom e-region-bottom">
+            <p class="err" id="e-region-bottom" aria-live="polite"></p>
+          </div>
+          <label class="agree" for="agree-bottom"><input type="checkbox" id="agree-bottom" required aria-describedby="e-agree-bottom"><span>(필수) <a href="posmos-privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>에 동의하며, 상담 목적으로 연락받는 것에 동의합니다.</span></label>
+          <p class="err" id="e-agree-bottom" aria-live="polite"></p>
+          <p class="err" id="e-send-bottom" aria-live="polite"></p>
+          <button class="btn xl" type="submit">0원 되는지 확인받기</button>
+        </form>
+        <ul class="prom">
+          <li>영업일 9시~18시 기준, 1시간 안에 담당자가 전화드립니다.</li>
+          <li>상담만 받고 안 하셔도 됩니다.</li>
+          <li>남기신 번호는 상담 연락과 서비스 안내에만 씁니다.</li>
+        </ul>
+        <p class="or">전화나 카카오톡이 편하시면</p>
+        <div class="btn2">
+          <a class="btn-o" href="tel:15442485" data-loc="v2-하단폼">전화 1544-2485</a>
+          <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-하단폼">카카오톡 상담</a>
+        </div>
+        <p class="co"><span class="nb">(주)포스모스</span><span class="sep"> · </span><span class="nb">대표 박은서</span><span class="sep s2"> · </span><span class="nb">사업자등록번호 330-86-02470</span><span class="sep s3"> · </span><span class="nb">경기도 의정부시 의정로 16, 4F~5F</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer class="ft">
@@ -1978,13 +1991,13 @@ try{
     $('#e-'+id+'-'+f.key).textContent=msg;
     el.setAttribute('aria-invalid','true');el.focus();
   };
-  /* 자동 하이픈 3-4-4 (+82 자동완성은 0으로 바꾼다) */
+  /* 자동 하이픈: 010 은 3-4-4, 서울 02 는 2-3-4·2-4-4, 그 밖의 지역번호는 3-3-4·3-4-4 (+82 자동완성은 0으로 바꾼다) */
   var hyphen=function(ev){
     var el=this,pos=el.selectionStart,n=el.value.slice(0,pos==null?99:pos).replace(/\D/g,'').length,v=el.value.replace(/\D/g,''),i=0,k=0;
     if(v.length>10&&v.indexOf('82')===0)v='0'+v.slice(2);
-    if(v.length<=3)el.value=v;
-    else if(v.length<=7)el.value=v.slice(0,3)+'-'+v.slice(3);
-    else el.value=v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7,11);
+    var a=v.indexOf('02')===0?2:3,b=v.length>=(a===2?10:11)||v.indexOf('010')===0?4:3;
+    v=v.slice(0,a+b+4);
+    el.value=v.length<=a?v:v.length<=a+b?v.slice(0,a)+'-'+v.slice(a):v.slice(0,a)+'-'+v.slice(a,a+b)+'-'+v.slice(a+b);
     while(k<n&&i<el.value.length){if(/\d/.test(el.value.charAt(i)))k++;i++}
     if(ev&&ev.inputType==='deleteContentForward'&&el.value.charAt(i)==='-')i++;
     try{el.setSelectionRange(i,i)}catch(e){}
@@ -2247,7 +2260,7 @@ try{
   gsap.fromTo('#panel',{scale:.84,transformOrigin:'50% 0%'},{scale:1,ease:'none',
     scrollTrigger:{trigger:'#panel',start:'top 100%',end:'top 40%',scrub:.5}});
   from('.pblock .price strong',{scale:.3,duration:1,ease:'back.out(1.8)'},'.pblock','top 84%');
-  from('.pk > img',{x:90,rotation:6,duration:1.1,ease:'expo.out'},'.pk','top 84%');
+  from('.pk > picture > img',{x:90,rotation:6,duration:1.1,ease:'expo.out'},'.pk','top 84%');
 
   /* ---- 배달: 3 → 1 ---- */
   if($('#dv')){
@@ -2264,7 +2277,6 @@ try{
   var ks={trigger:'#kin',start:'top bottom',end:'bottom top',scrub:.8},kw=W.innerWidth>=1000?.6:1;
   gsap.fromTo('.kin .r1',{xPercent:-5}, {xPercent:-5-145*kw,ease:'none',scrollTrigger:ks});
   gsap.fromTo('.kin .r2',{xPercent:-15-145*kw},{xPercent:-15,ease:'none',scrollTrigger:ks});
-  gsap.fromTo('.kin .r3',{xPercent:-20},{xPercent:-20-145*kw,ease:'none',scrollTrigger:ks});
   revs.push({el:$('#kin'),tw:gsap.fromTo('.kin .band',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.1,ease:'expo.out',
     scrollTrigger:{trigger:'#kin',start:'top 78%',once:true}})});
 
