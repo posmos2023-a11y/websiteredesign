@@ -476,6 +476,7 @@ body:has(.done) .ft{padding-bottom:56px}
 @media (max-width:899px){ .trust h3{font-size:24px} }   /* 바로 아래 구역 제목(30px)과 크기가 겹쳐 구역 시작이 흐려지지 않게 */
 /* 신뢰 목록은 이미지(graphics/trust.html) + 걸 수 있는 전화번호 글자 링크 */
 .trust .trust-img{margin-top:22px;max-width:460px}
+@media (min-width:700px) and (max-width:899px){ .trust .trust-img{max-width:560px} }
 .tel-big{display:inline-block;margin-top:14px;font-size:clamp(44px,5.2vw,64px);font-weight:900;letter-spacing:-.045em;line-height:1;color:var(--ink);white-space:nowrap}
 @media (hover:hover) and (pointer:fine){ .tel-big:hover{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.12em} }
 @media (min-width:900px){
@@ -505,6 +506,7 @@ body:has(.done) .ft{padding-bottom:56px}
 /* 돈 얘기는 이미지 한 장(graphics/money.html)으로 한눈에, 가격 조건은 바로 아래 글자로 남긴다 */
 .money-img{margin-top:32px;max-width:700px}
 .money-cond{margin-top:16px;max-width:34em;color:var(--ink-2)}
+@media (min-width:700px) and (max-width:999px){ .money-img{max-width:none} }
 @media (min-width:700px){ .money{padding-top:40px} }
 @media (min-width:1000px){
   .mg{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:64px;align-items:start}
@@ -526,7 +528,8 @@ body:has(.done) .ft{padding-bottom:56px}
 .feat{background:var(--blue);color:#fff;border-radius:28px;padding:28px 24px;display:flex;flex-direction:column}
 .feat :focus-visible{outline-color:#fff}
 .feat h3{font-size:clamp(24px,2.8vw,34px);font-weight:900;letter-spacing:-.035em;line-height:1.25}
-.feats-img{margin-top:22px;max-width:520px}   /* 파랑 카드와 같은 색 배경(graphics/zero-feats.html): 이음매 없이 이어진다 */
+.feats-img{margin-top:22px;max-width:520px}
+@media (min-width:700px) and (max-width:899px){ .feats-img{max-width:none} }   /* 파랑 카드와 같은 색 배경(graphics/zero-feats.html): 이음매 없이 이어진다 */
 .pline{margin-top:30px;padding-top:26px;border-top:2px solid rgba(255,255,255,.25)}
 .pline .price{margin-top:0;gap:4px 14px}
 .pline .pl-n{font-size:clamp(20px,2vw,24px);font-weight:800;color:#fff;letter-spacing:-.03em}
@@ -720,8 +723,11 @@ body:has(.done) .ft{padding-bottom:56px}
   .ps-f{border-radius:20px}
 }
 /* 두 칸은 화면 캡처가 읽을 수 있는 크기로 나올 때만 */
+@media (min-width:768px) and (max-width:1099px){ .pg{display:grid;grid-template-columns:minmax(0,1fr) 400px;column-gap:40px;align-items:start} .ps{max-width:none;margin:0} }
 @media (min-width:1100px){
   .pg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,38%);column-gap:56px;align-items:start}
+  .proc li>div{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .proc .tag{margin-top:0}
   .ps{max-width:none;margin:0;position:sticky;top:112px}
 }
 @media (min-width:1200px){ .pg{column-gap:104px;margin-top:80px} .proc{gap:48px} .ps{border-radius:44px;padding:36px 36px 26px} }
@@ -751,7 +757,7 @@ details[open]>summary .pl{transform:rotate(45deg);background:var(--orange)}
 
 /* ---------- 마지막 폼 ---------- */
 .close{padding-top:0;padding-bottom:72px}
-.end .lead{margin-bottom:36px}
+.end .h2{margin-bottom:32px}   /* 제목 바로 아래가 주황 띠(폼)다: 리드 문장이 없으므로 제목이 간격을 갖는다 */
 @media (max-width:369px){ .end .h2{font-size:28px} }   /* 360px 폰: 둘째 줄('포스모스가 확인해 드립니다.')이 한 줄에 들어간다 */
 .fs-r{margin-top:0}
 @media (max-width:899px){ .close{padding-top:40px} }
@@ -760,7 +766,7 @@ details[open]>summary .pl{transform:rotate(45deg);background:var(--orange)}
   .close{padding-bottom:120px}
   .close-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,50%);column-gap:48px;align-items:start}
   .end{padding:72px 36px 0 0;position:sticky;top:calc(var(--top) + 24px)}
-  .end .lead{margin-bottom:0}
+  .end .h2{margin-bottom:0}
   .fs-r{margin:0 calc(var(--g) * -1) 0 0;padding:72px var(--g) 72px 0}
   .fs-r .slab{border-radius:40px 0 0 40px}
   .fs-r .fc{margin-left:-36px}
@@ -1465,7 +1471,7 @@ if(META_PIXEL_ID){
         <source type="image/webp" media="(min-width:700px)" srcset="img/g-money-w.webp" width="700" height="480">
         <img class="gfx money-img" src="img/g-money.webp" width="335" height="722" alt="쓰던 기기와 토스프론트로 시작하면 설치비·관리비·기기값 0원이고, 월 이용료·보증금·가입비가 없으며 인터넷을 새로 가입하지 않아도 됩니다. 태블릿·휴대폰 모두 가능합니다. 포스기 세트는 월 34,000원에 인터넷·CCTV·포스기 본체가 포함됩니다." loading="lazy" decoding="async">
       </picture>
-      <p class="fine money-cond">월 34,000원은 <span class="nb">LGU+ 모바일 결합 시,</span> 정가 43,000원, <span class="nb">부가세 별도</span>입니다. 카드 결제 수수료는 포스 비용과 별도입니다.</p>
+      <p class="fine money-cond">월 34,000원은 <span class="nb">LGU+ 모바일 결합 시,</span> <span class="nb">정가 43,000원,</span> <span class="nb">부가세 별도</span>입니다.<br><span class="nb">카드 결제 수수료는 포스 비용과 별도입니다.</span></p>
       <div class="cta">
         <a class="btn xl" href="posmos-apply.html?from=v2-돈얘기" data-from="v2-돈얘기" data-offer="unknown" data-target="top">내 매장도 0원 되는지 확인하기</a>
       </div>
@@ -1519,7 +1525,7 @@ if(META_PIXEL_ID){
   <div class="wrap">
     <div class="panel" id="panel">
       <div class="pa">
-        <h2 class="h2 rv-h"><span class="ln"><span class="in">인터넷·CCTV·포스기 세트,</span></span> <span class="ln"><span class="in">월 34,000원에 한 번에.</span></span></h2>
+        <h2 class="h2 rv-h"><span class="ln"><span class="in">인터넷·CCTV·포스기를</span></span> <span class="ln"><span class="in">한 번에.</span></span></h2>
         <div class="pblock">
           <p class="price"><strong>월 34,000원</strong><s>정가 43,000원</s></p>
           <p class="fine">LGU+ 모바일 결합 시 · 부가세 별도</p>
@@ -1782,7 +1788,6 @@ if(META_PIXEL_ID){
           <a class="btn-o" href="tel:15442485" data-loc="v2-하단폼">전화 1544-2485</a>
           <a class="btn-k" href="https://pf.kakao.com/_Rxolxkb" data-loc="v2-하단폼">카카오톡 상담</a>
         </div>
-        <p class="co"><span class="nb">(주)포스모스</span><span class="sep"> · </span><span class="nb">대표 박은서</span><span class="sep s2"> · </span><span class="nb">사업자등록번호 330-86-02470</span><span class="sep s3"> · </span><span class="nb">경기도 의정부시 의정로 16, 4F~5F</span></p>
       </div>
     </div>
   </div>
@@ -2153,7 +2158,6 @@ try{
   from('.trust h3',{y:W.innerWidth<700?24:60,opacity:0,duration:.9,ease:'expo.out'},'.trust','top 84%');   /* 기다리는 동안 투명: 휴대폰에서 아래 '1만'과 겹쳐 보이지 않는다 */
   from('#fs-bottom .slab',{xPercent:102,duration:1.05,ease:'expo.out',clearProps:'transform'},'#fs-bottom','top 82%');
   from('#fc-bottom',{scale:.86,rotation:5,transformOrigin:'50% 0%',duration:1.1,delay:.12,ease:'back.out(1.5)'},'#fs-bottom','top 82%');
-  from('.end .lead',{y:40,opacity:0,duration:.9,ease:'expo.out',delay:.25},'#h2c','top 88%');
 
   /* ---- 돈 얘기: 조용하게 ---- */
   $$('.q').forEach(function(q){from(q,{y:44,opacity:0,duration:.8,ease:'expo.out'},q,'top 90%')});
